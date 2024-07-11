@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { isValidEmail } from '../../utils/validation';
+import { isValidEmail, isValidPassword } from '../../utils/validation';
 
 // Интерфейс формы аутентификации
 interface AuthFormState {
@@ -29,7 +29,7 @@ const authFormSlice = createSlice({
     // Обновление поля password и простая проверка длины
     setPassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
-      state.passwordError = action.payload.length > 4 || length > 14 ? '' : 'Password must be between 4 and 14 characters';
+      state.passwordError = isValidPassword(action.payload) ? '' : 'Password must be at least 6 characters';
     },
     // Сброс формы
     resetForm(state) {
