@@ -2,16 +2,20 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { API_URL } from '../../api/config';
 
+// Интерфейс аутентификации
 interface AuthState {
   isAuthenticated: boolean;
   user: { [key: string]: any } | null;
+  message: string;
 }
-
+// Определение начального состояния аутентификации
 const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
+  message: '',
 };
 
+// Асинхронное действие для входа
 export const logIn = createAsyncThunk(
   'auth/logIn',
   async ({ email, password }: { email: string; password: string }) => {
@@ -20,6 +24,7 @@ export const logIn = createAsyncThunk(
   }
 );
 
+// Асинхронное действие для регистрации
 export const register = createAsyncThunk(
   'auth/register',
   async ({ email, password }: { email: string; password: string }) => {
@@ -28,16 +33,19 @@ export const register = createAsyncThunk(
   }
 );
 
+// Создаем слайс для аутентификации
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    // Действие для выхода
     logOut: (state) => {
       state.isAuthenticated = false;
       state.user = null;
       localStorage.removeItem('token');
     },
   },
+  // Дополнительные действие после отработки асинхронных действий для входа и регистрации
   extraReducers: (builder) => {
     builder
       .addCase(logIn.fulfilled, (state, action: PayloadAction<any>) => {
@@ -53,5 +61,8 @@ export const authSlice = createSlice({
   },
 });
 
+// Экспортируем действия
 export const { logOut } = authSlice.actions;
+
+// Экспортируем редуктор
 export default authSlice.reducer;

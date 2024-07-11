@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './Sclices/auth/authSlice';
-import usersReducer from './Sclices/users/usersSlice';
-import authFormReducer from './Sclices/authForm/authFormSlice';
+import authReducer from './sclices/auth/authSlice';
+import authFormReducer from './sclices/authForm/authFormSlice';
 
+//! Фигня, патом разберусь
+import usersReducer from './sclices/users/usersSlice';
+
+// Конфигурируем store с редукторами
 const store = configureStore({
   reducer: {
     auth: authReducer,

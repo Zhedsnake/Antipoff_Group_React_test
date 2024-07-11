@@ -3,7 +3,7 @@
 
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../hooks';
-import { fetchUsers } from '../Sclices/users/usersSlice';
+import { fetchUsers } from '../sclices/users/usersSlice';
 
 const UserList: React.FC = () => {
   const dispatch = useAppDispatch();
