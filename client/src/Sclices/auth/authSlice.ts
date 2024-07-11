@@ -6,13 +6,11 @@ import { API_URL } from '../../api/config';
 interface AuthState {
   isAuthenticated: boolean;
   user: { [key: string]: any } | null;
-  message: string;
 }
 // Определение начального состояния аутентификации
 const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
-  message: '',
 };
 
 // Асинхронное действие для входа
