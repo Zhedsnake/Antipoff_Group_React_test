@@ -8,18 +8,22 @@ import { setEmail, setPassword } from '../sclices/authForm/authFormSlice';
 const AuthForm: React.FC = () => {
   // Используем dispatch для отправки действий
   const dispatch = useAppDispatch();
-  
+
   // Получаем текущие значения полей email и password из состояния
-  const { email, password } = useAppSelector((state) => state.authForm);
+  const { email, password, emailError, passwordError } = useAppSelector((state) => state.authForm);
 
   // Обработчик для входа
   const handleLogIn = () => {
-    dispatch(logIn({ email, password }));
+    if (!emailError && !passwordError) {
+      dispatch(logIn({ email, password }));
+    }
   };
 
   // Обработчик для регистрации
   const handleRegister = () => {
-    dispatch(register({ email, password }));
+    if (!emailError && !passwordError) {
+      dispatch(register({ email, password }));
+    }
   };
 
   return (
@@ -30,14 +34,16 @@ const AuthForm: React.FC = () => {
         onChange={(e) => dispatch(setEmail(e.target.value))}
         placeholder="Email"
       />
+      {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
       <input
         type="password"
         value={password}
         onChange={(e) => dispatch(setPassword(e.target.value))}
         placeholder="Password"
       />
-      <button onClick={handleLogIn}>Log In</button>
-      <button onClick={handleRegister}>Register</button>
+      {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
+      <button onClick={handleLogIn} disabled={!!emailError || !!passwordError}>Log In</button>
+      <button onClick={handleRegister} disabled={!!emailError || !!passwordError}>Register</button>
     </div>
   );
 };
