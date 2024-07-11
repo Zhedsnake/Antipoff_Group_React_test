@@ -29,7 +29,7 @@ const authFormSlice = createSlice({
     // Обновление поля password и простая проверка длины
     setPassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
-      state.passwordError = action.payload.length > 6 || length > 14 ? '' : 'Password must be between 6 and 14 characters';
+      state.passwordError = action.payload.length > 4 || length > 14 ? '' : 'Password must be between 4 and 14 characters';
     },
     // Сброс формы
     resetForm(state) {

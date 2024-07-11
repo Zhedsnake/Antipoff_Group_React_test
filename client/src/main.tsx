@@ -2,29 +2,38 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
+// CSS
+import "./css/index.css";
+import "./css/App.css";
+import "./css/Authentification.css";
+
 // Rexus
 import { Provider } from 'react-redux';
 import store from './store';
 
 // Pages
 import Homepage from "./pages/App";
-import Authentification from "./pages/Auth";
+import Authentification from "./pages/Authentification";
 
 // Guards
-import GuestGuard from './guards/GuestGuard';
-import UserGuard from './guards/UserGuard';
+import GuestGuard from './components/guards/GuestGuard';
+import UserGuard from './components/guards/UserGuard';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Homepage />
+      <GuestGuard>
+        <Homepage />
+      </GuestGuard>
     ),
   },
   {
-    path: " ",
+    path: "/authentification",
     element: (
-      <Authentification />
+      <UserGuard>
+        <Authentification />
+      </UserGuard>
     ),
   },
 ]);

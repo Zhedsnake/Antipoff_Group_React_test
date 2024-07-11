@@ -30,7 +30,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async ({ email, password }: { email: string; password: string }) => {
     //! Потом переделать api
-    const response = await axios.post(`${API_URL}/user/register`, { email, password });
+    const response = await axios.post(`${API_URL}/api/register`, { email, password });
     return response.data;
   }
 );
