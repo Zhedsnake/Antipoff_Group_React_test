@@ -1,24 +1,35 @@
-import React, { useState } from 'react';
-import { useAppDispatch } from '../hooks';
-import { logIn, register } from '../features/auth/authSlice';
+import React from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+
+import { logIn, register } from '../Sclices/auth/authSlice';
+import { setEmail, setPassword } from '../Sclices/authForm/authFormSlice';
 
 const AuthForm: React.FC = () => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
+  const { email, password } = useAppSelector((state) => state.authForm);
 
   const handleLogIn = () => {
-    dispatch(logIn({ login, password }));
+    dispatch(logIn({ email, password }));
   };
 
   const handleRegister = () => {
-    dispatch(register({ login, password }));
+    dispatch(register({ email, password }));
   };
 
   return (
     <div>
-      <input value={login} onChange={(e) => setLogin(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => dispatch(setEmail(e.target.value))}
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => dispatch(setPassword(e.target.value))}
+        placeholder="Password"
+      />
       <button onClick={handleLogIn}>Log In</button>
       <button onClick={handleRegister}>Register</button>
     </div>

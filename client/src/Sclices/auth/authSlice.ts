@@ -14,16 +14,16 @@ const initialState: AuthState = {
 
 export const logIn = createAsyncThunk(
   'auth/logIn',
-  async ({ login, password }: { login: string; password: string }) => {
-    const response = await axios.post(`${API_URL}/user/login`, { login, password });
+  async ({ email, password }: { email: string; password: string }) => {
+    const response = await axios.post(`${API_URL}/user/login`, { email, password });
     return response.data;
   }
 );
 
 export const register = createAsyncThunk(
   'auth/register',
-  async ({ login, password }: { login: string; password: string }) => {
-    const response = await axios.post(`${API_URL}/user/register`, { login, password });
+  async ({ email, password }: { email: string; password: string }) => {
+    const response = await axios.post(`${API_URL}/user/register`, { email, password });
     return response.data;
   }
 );

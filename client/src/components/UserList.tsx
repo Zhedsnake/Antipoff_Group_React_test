@@ -1,6 +1,9 @@
+
+//! Это пока херня, потом заменить
+
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../hooks';
-import { fetchUsers } from '../features/users/usersSlice';
+import { fetchUsers } from '../Sclices/users/usersSlice';
 
 const UserList: React.FC = () => {
   const dispatch = useAppDispatch();
