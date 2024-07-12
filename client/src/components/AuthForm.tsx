@@ -40,7 +40,9 @@ const AuthForm: React.FC = () => {
 
   return (
     <div className="auth-form-container">
-      <h1 className="auth-form-header">{mode === 'login' ? 'Вход' : 'Регистрация'}</h1>
+      <h1 className="auth-form-header">
+        {mode === 'login' ? 'Вход' : 'Регистрация'}
+      </h1>
       <ModeToggle />
       <div className="auth-form-group">
         <label htmlFor="login">Имя</label>

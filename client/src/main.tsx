@@ -4,8 +4,6 @@ import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
 // CSS
 import "./css/index.css";
-import "./css/App.css";
-import "./css/Authentification.css";
 
 // Rexus
 import { Provider } from 'react-redux';
