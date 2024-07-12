@@ -6,5 +6,5 @@ export const isValidEmail = (email: string): boolean => {
 };
 
 export const isValidPassword = (password: string): boolean => {
-  return password.length >= MIN_PASSWORD_LENGTH || password.length <= MAX_PASSWORD_LENGTH;
+  return password.length >= MIN_PASSWORD_LENGTH;
 };
