@@ -8,7 +8,7 @@ const ModeToggle: React.FC = () => {
 
   return (
     <button className="auth__form-button" onClick={() => dispatch(toggleMode())}>
-      {mode === 'login' ? 'Switch to Register' : 'Switch to Log In'}
+      {mode === 'login' ? 'Переключитесь на регистрацию' : 'Переключитесь на вход в систему'}
     </button>
   );
 };

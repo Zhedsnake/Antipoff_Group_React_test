@@ -1,6 +1,7 @@
 .auth__form-container {
   max-width: 500px;
   margin: 0 auto;
+  margin-top: 40px;
   padding: 16px 16px 6px;
   border: 1px solid #ccc;
   border-radius: 16px;
@@ -71,4 +72,20 @@
 .auth__form-button:hover {
   background-color: #0056b3;
 }
+.auth__password-container {
+  position: relative;
+}
+.auth__confirm-password-container {
+  position: relative;
+}
 
+.auth__password-toggle-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #007bff;
+}

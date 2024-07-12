@@ -47,6 +47,7 @@ const AuthForm: React.FC = () => {
           type="text"
           id="login"
           value=""
+          maxLength={30}
           readOnly
         />
       </div>

@@ -21,17 +21,17 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      // <GuestGuard>
+      <GuestGuard>
         <Homepage />
-      // </GuestGuard>
+      </GuestGuard>
     ),
   },
   {
     path: "/authentification",
     element: (
-      // <UserGuard>
+      <UserGuard>
         <Authentification />
-      // </UserGuard>
+      </UserGuard>
     ),
   },
 ]);

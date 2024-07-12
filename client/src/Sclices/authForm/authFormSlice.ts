@@ -12,6 +12,8 @@ interface AuthFormState {
   emailError: string;
   passwordError: string;
   confirmPasswordError: string;
+  showPassword: boolean;
+  showConfirmPassword: boolean;
 }
 // Начальная форма аутентификации
 const initialState: AuthFormState = {
@@ -22,6 +24,8 @@ const initialState: AuthFormState = {
   emailError: '',
   passwordError: '',
   confirmPasswordError: '',
+  showPassword: false,
+  showConfirmPassword: false,
 };
 
 // Создаем слайс для формы аутентификации
@@ -48,20 +52,17 @@ const authFormSlice = createSlice({
       state.confirmPassword = action.payload;
       state.confirmPasswordError = action.payload === state.password ? '' : 'Пароли не совпадают';
     },
-    // Сброс формы
-    resetForm(state) {
-      state.email = '';
-      state.password = '';
-      state.confirmPassword = '';
-      state.emailError = '';
-      state.passwordError = '';
-      state.confirmPasswordError = '';
+    toggleShowPassword(state) {
+      state.showPassword = !state.showPassword;
+    },
+    toggleShowConfirmPassword(state) {
+      state.showConfirmPassword = !state.showConfirmPassword;
     },
   },
 });
 
 // Экспортируем действия
-export const { toggleMode, setEmail, setPassword, setConfirmPassword, resetForm } = authFormSlice.actions;
+export const { toggleMode, setEmail, setPassword, setConfirmPassword, toggleShowPassword, toggleShowConfirmPassword } = authFormSlice.actions;
 
 // Экспортируем редуктор
 export default authFormSlice.reducer;

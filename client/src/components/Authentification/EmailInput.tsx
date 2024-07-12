@@ -14,6 +14,7 @@ const EmailInput: React.FC = () => {
         type="email"
         id="email"
         value={email}
+        maxLength={30}
         onChange={(e) => dispatch(setEmail(e.target.value))}
       />
       {emailError && <div className="auth__form-error">{emailError}</div>}
