@@ -4,5 +4,5 @@ export const isValidEmail = (email: string): boolean => {
 };
 
 export const isValidPassword = (password: string): boolean => {
-  return password.length > 4 || length > 14;
+  return password.length >= import.meta.env.MIN_PASSWORD_LENGTH || password.length <= import.meta.env.MAX_PASSWORD_LENGTH;
 };

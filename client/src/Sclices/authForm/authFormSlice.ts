@@ -39,7 +39,7 @@ const authFormSlice = createSlice({
     // Обновление поля password и простая проверка длинны
     setPassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
-      state.passwordError = isValidPassword(action.payload) ? '' : 'Password must be at least 6 characters';
+      state.passwordError = isValidPassword(action.payload) ? '' : `Password must be between ${import.meta.env.MIN_PASSWORD_LENGTH} and ${import.meta.env.MAX_PASSWORD_LENGTH}} characters`;
     },
     // Обновление поля confirmPassword и проверка его соответствия с password
     setConfirmPassword(state, action: PayloadAction<string>) {
