@@ -9,8 +9,10 @@ const PasswordInput: React.FC = () => {
 
   return (
     <div>
+      <label htmlFor="password">Пароль</label>
       <input
         type="password"
+        id="password"
         value={password}
         onChange={(e) => dispatch(setPassword(e.target.value))}
         placeholder="Password"

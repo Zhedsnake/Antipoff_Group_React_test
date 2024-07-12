@@ -9,8 +9,10 @@ const ConfirmPasswordInput: React.FC = () => {
 
   return (
     <div>
+      <label htmlFor="confirmPassword">Подтвердить пароль</label>
       <input
         type="password"
+        id="confirmPassword"
         value={confirmPassword}
         onChange={(e) => dispatch(setConfirmPassword(e.target.value))}
         placeholder="Confirm Password"

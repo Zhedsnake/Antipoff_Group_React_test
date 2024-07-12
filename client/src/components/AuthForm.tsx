@@ -38,6 +38,7 @@ const AuthForm: React.FC = () => {
 
   return (
     <div>
+      <h1>Регистрация</h1>
       <ModeToggle />
       <input
         type="text"

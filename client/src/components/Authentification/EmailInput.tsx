@@ -9,8 +9,10 @@ const EmailInput: React.FC = () => {
 
   return (
     <div>
+      <label htmlFor="email">Электронная почта</label>
       <input
         type="email"
+        id="email"
         value={email}
         onChange={(e) => dispatch(setEmail(e.target.value))}
         placeholder="Email"
