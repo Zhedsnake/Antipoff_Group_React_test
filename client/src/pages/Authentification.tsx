@@ -1,6 +1,8 @@
 import React from 'react';
 import AuthForm from '../components/AuthForm';
 
+import '../css/Authentification.css';
+
 const Auth: React.FC = () => {
   return (
     <div className="Auth">

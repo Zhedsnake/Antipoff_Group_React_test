@@ -36,17 +36,17 @@ const authFormSlice = createSlice({
     // Обновление поля email и проверка его валидности
     setEmail(state, action: PayloadAction<string>) {
       state.email = action.payload;
-      state.emailError = isValidEmail(action.payload) ? '' : 'Invalid email address';
+      state.emailError = isValidEmail(action.payload) ? '' : 'Неверный адрес электронной почты';
     },
     // Обновление поля password и простая проверка длинны
     setPassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
-      state.passwordError = isValidPassword(action.payload) ? '' : `Password must be between ${MIN_PASSWORD_LENGTH} and ${MAX_PASSWORD_LENGTH} characters`;
+      state.passwordError = isValidPassword(action.payload) ? '' : `Длина пароля должна составлять от ${MIN_PASSWORD_LENGTH} до ${MAX_PASSWORD_LENGTH} символов`;
     },
     // Обновление поля confirmPassword и проверка его соответствия с password
     setConfirmPassword(state, action: PayloadAction<string>) {
       state.confirmPassword = action.payload;
-      state.confirmPasswordError = action.payload === state.password ? '' : 'Passwords do not match';
+      state.confirmPasswordError = action.payload === state.password ? '' : 'Пароли не совпадают';
     },
     // Сброс формы
     resetForm(state) {

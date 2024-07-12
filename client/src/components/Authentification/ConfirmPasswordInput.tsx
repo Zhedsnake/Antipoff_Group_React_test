@@ -8,7 +8,7 @@ const ConfirmPasswordInput: React.FC = () => {
   const confirmPasswordError = useAppSelector((state) => state.authForm.confirmPasswordError);
 
   return (
-    <div className="auth-form-group">
+    <div className="auth__form-group">
       <label htmlFor="confirmPassword">Подтвердить пароль</label>
       <input
         type="password"
@@ -16,7 +16,7 @@ const ConfirmPasswordInput: React.FC = () => {
         value={confirmPassword}
         onChange={(e) => dispatch(setConfirmPassword(e.target.value))}
       />
-      {confirmPasswordError && <p className="auth-form-error">{confirmPasswordError}</p>}
+      {confirmPasswordError && <div className="auth__form-error">{confirmPasswordError}</div>}
     </div>
   );
 };

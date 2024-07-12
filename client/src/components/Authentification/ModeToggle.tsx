@@ -7,7 +7,7 @@ const ModeToggle: React.FC = () => {
   const mode = useAppSelector((state) => state.authForm.mode);
 
   return (
-    <button onClick={() => dispatch(toggleMode())}>
+    <button className="auth__form-button" onClick={() => dispatch(toggleMode())}>
       {mode === 'login' ? 'Switch to Register' : 'Switch to Log In'}
     </button>
   );

@@ -8,7 +8,7 @@ const PasswordInput: React.FC = () => {
   const passwordError = useAppSelector((state) => state.authForm.passwordError);
 
   return (
-    <div className="auth-form-group">
+    <div className="auth__form-group">
       <label htmlFor="password">Пароль</label>
       <input
         type="password"
@@ -16,7 +16,7 @@ const PasswordInput: React.FC = () => {
         value={password}
         onChange={(e) => dispatch(setPassword(e.target.value))}
       />
-      {passwordError && <p className="auth-form-error">{passwordError}</p>}
+      {passwordError && <div className="auth__form-error">{passwordError}</div>}
     </div>
   );
 };

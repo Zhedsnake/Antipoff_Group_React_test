@@ -8,7 +8,7 @@ const EmailInput: React.FC = () => {
   const emailError = useAppSelector((state) => state.authForm.emailError);
 
   return (
-    <div className="auth-form-group">
+    <div className="auth__form-group">
       <label htmlFor="email">Электронная почта</label>
       <input
         type="email"
@@ -16,7 +16,7 @@ const EmailInput: React.FC = () => {
         value={email}
         onChange={(e) => dispatch(setEmail(e.target.value))}
       />
-      {emailError && <p className="auth-form-error">{emailError}</p>}
+      {emailError && <div className="auth__form-error">{emailError}</div>}
     </div>
   );
 };
