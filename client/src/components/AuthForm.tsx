@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 
 import { logIn, register } from '../sclices/auth/authSlice';
-import { setEmail, setPassword, setConfirmPassword, resetForm, toggleMode } from '../sclices/authForm/authFormSlice';
-
+import EmailInput from '../components/Authentification/EmailInput';
+import PasswordInput from '../components/Authentification/PasswordInput';
+import ConfirmPasswordInput from '../components/Authentification/ConfirmPasswordInput';
+import ModeToggle from '../components/Authentification/ModeToggle';
 
 const AuthForm: React.FC = () => {
   // Используем dispatch для отправки действий
@@ -36,40 +38,16 @@ const AuthForm: React.FC = () => {
 
   return (
     <div>
-      <button onClick={() => dispatch(toggleMode())}>
-        {mode === 'login' ? 'Switch to Register' : 'Switch to Log In'}
-      </button>
+      <ModeToggle />
       <input
         type="text"
         value=""
         placeholder="Username (just a dummy input)"
         readOnly
       />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => dispatch(setEmail(e.target.value))}
-        placeholder="Email"
-      />
-      {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => dispatch(setPassword(e.target.value))}
-        placeholder="Password"
-      />
-      {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
-      {mode === 'register' && (
-        <>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => dispatch(setConfirmPassword(e.target.value))}
-            placeholder="Confirm Password"
-          />
-          {confirmPasswordError && <p style={{ color: 'red' }}>{confirmPasswordError}</p>}
-        </>
-      )}
+      <EmailInput />
+      <PasswordInput />
+      {mode === 'register' && <ConfirmPasswordInput />}
       {mode === 'register' ? (
         <button onClick={handleRegister} disabled={!!emailError || !!passwordError || !!confirmPasswordError}>Register</button>
       ) : (
