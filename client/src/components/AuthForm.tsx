@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 
 import { logIn, register } from '../sclices/auth/authSlice';
-import { setEmail, setPassword } from '../sclices/authForm/authFormSlice';
+import { setEmail, setPassword, setConfirmPassword, resetForm, toggleMode } from '../sclices/authForm/authFormSlice';
 
 
 const AuthForm: React.FC = () => {
@@ -10,7 +10,7 @@ const AuthForm: React.FC = () => {
   const dispatch = useAppDispatch();
 
   // Получаем текущие значения полей email и password из состояния
-  const { email, password, emailError, passwordError } = useAppSelector((state) => state.authForm);
+  const { mode, email, password, confirmPassword, emailError, passwordError, confirmPasswordError } = useAppSelector((state) => state.authForm);
 
   useEffect(() => {
     // Восстанавливаем состояние из localStorage при монтировании компонента
@@ -29,13 +29,22 @@ const AuthForm: React.FC = () => {
 
   // Обработчик для регистрации
   const handleRegister = () => {
-    if (!emailError && !passwordError) {
+    if (!emailError && !passwordError && !confirmPasswordError) {
       dispatch(register({ email, password }));
     }
   };
 
   return (
     <div>
+      <button onClick={() => dispatch(toggleMode())}>
+        {mode === 'login' ? 'Switch to Register' : 'Switch to Log In'}
+      </button>
+      <input
+        type="text"
+        value=""
+        placeholder="Username (just a dummy input)"
+        readOnly
+      />
       <input
         type="email"
         value={email}
@@ -50,8 +59,22 @@ const AuthForm: React.FC = () => {
         placeholder="Password"
       />
       {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
-      <button onClick={handleLogIn} disabled={!!emailError || !!passwordError}>Log In</button>
-      <button onClick={handleRegister} disabled={!!emailError || !!passwordError}>Register</button>
+      {mode === 'register' && (
+        <>
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => dispatch(setConfirmPassword(e.target.value))}
+            placeholder="Confirm Password"
+          />
+          {confirmPasswordError && <p style={{ color: 'red' }}>{confirmPasswordError}</p>}
+        </>
+      )}
+      {mode === 'register' ? (
+        <button onClick={handleRegister} disabled={!!emailError || !!passwordError || !!confirmPasswordError}>Register</button>
+      ) : (
+        <button onClick={handleLogIn} disabled={!!emailError || !!passwordError}>Log In</button>
+      )}
     </div>
   );
 };
