@@ -8,16 +8,15 @@ const EmailInput: React.FC = () => {
   const emailError = useAppSelector((state) => state.authForm.emailError);
 
   return (
-    <div>
+    <div className="auth-form-group">
       <label htmlFor="email">Электронная почта</label>
       <input
         type="email"
         id="email"
         value={email}
         onChange={(e) => dispatch(setEmail(e.target.value))}
-        placeholder="Email"
       />
-      {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
+      {emailError && <p className="auth-form-error">{emailError}</p>}
     </div>
   );
 };

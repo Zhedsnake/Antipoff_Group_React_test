@@ -7,6 +7,8 @@ import PasswordInput from '../components/Authentification/PasswordInput';
 import ConfirmPasswordInput from '../components/Authentification/ConfirmPasswordInput';
 import ModeToggle from '../components/Authentification/ModeToggle';
 
+import '../css/Authentification.css';
+
 const AuthForm: React.FC = () => {
   // Используем dispatch для отправки действий
   const dispatch = useAppDispatch();
@@ -37,22 +39,25 @@ const AuthForm: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Регистрация</h1>
+    <div className="auth-form-container">
+      <h1 className="auth-form-header">{mode === 'login' ? 'Вход' : 'Регистрация'}</h1>
       <ModeToggle />
-      <input
-        type="text"
-        value=""
-        placeholder="Username (just a dummy input)"
-        readOnly
-      />
+      <div className="auth-form-group">
+        <label htmlFor="login">Имя</label>
+        <input
+          type="text"
+          id="login"
+          value=""
+          readOnly
+        />
+      </div>
       <EmailInput />
       <PasswordInput />
       {mode === 'register' && <ConfirmPasswordInput />}
       {mode === 'register' ? (
-        <button onClick={handleRegister} disabled={!!emailError || !!passwordError || !!confirmPasswordError}>Register</button>
+        <button className="auth-form-button" onClick={handleRegister} disabled={!!emailError || !!passwordError || !!confirmPasswordError}>Зарегистрироваться</button>
       ) : (
-        <button onClick={handleLogIn} disabled={!!emailError || !!passwordError}>Log In</button>
+        <button className="auth-form-button" onClick={handleLogIn} disabled={!!emailError || !!passwordError}>Войти</button>
       )}
     </div>
   );

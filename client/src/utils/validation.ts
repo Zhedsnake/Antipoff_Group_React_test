@@ -1,4 +1,4 @@
-import { MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH } from './validationconfig';
+import { MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH } from '../api/config';
 
 export const isValidEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

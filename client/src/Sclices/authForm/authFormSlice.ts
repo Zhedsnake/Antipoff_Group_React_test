@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { isValidEmail, isValidPassword } from '../../utils/validation';
 
+import { MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH } from '../../api/config';
+
 // Интерфейс формы аутентификации
 interface AuthFormState {
   mode: 'login' | 'register';
@@ -13,7 +15,7 @@ interface AuthFormState {
 }
 // Начальная форма аутентификации
 const initialState: AuthFormState = {
-  mode: 'login',
+  mode: 'register',
   email: '',
   password: '',
   confirmPassword: '',
@@ -39,7 +41,7 @@ const authFormSlice = createSlice({
     // Обновление поля password и простая проверка длинны
     setPassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
-      state.passwordError = isValidPassword(action.payload) ? '' : `Password must be between ${import.meta.env.MIN_PASSWORD_LENGTH} and ${import.meta.env.MAX_PASSWORD_LENGTH}} characters`;
+      state.passwordError = isValidPassword(action.payload) ? '' : `Password must be between ${MIN_PASSWORD_LENGTH} and ${MAX_PASSWORD_LENGTH} characters`;
     },
     // Обновление поля confirmPassword и проверка его соответствия с password
     setConfirmPassword(state, action: PayloadAction<string>) {
