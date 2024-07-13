@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { API_URL } from '../../api/config';
+import { logInRequest, registerRequest } from '../../api/auth';
 
 // Интерфейс аутентификации
 interface AuthState {
@@ -17,8 +16,8 @@ const initialState: AuthState = {
 export const logIn = createAsyncThunk(
   'auth/logIn',
   async ({ email, password }: { email: string; password: string }) => {
-    const response = await axios.post(`${API_URL}/api/login`, { email, password });
-    return response.data;
+    const data = await logInRequest(email, password);
+    return data;
   }
 );
 
@@ -26,8 +25,8 @@ export const logIn = createAsyncThunk(
 export const register = createAsyncThunk(
   'auth/register',
   async ({ email, password }: { email: string; password: string }) => {
-    const response = await axios.post(`${API_URL}/api/register`, { email, password });
-    return response.data;
+    const data = await registerRequest(email, password);
+    return data;
   }
 );
 

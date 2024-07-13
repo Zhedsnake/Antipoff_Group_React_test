@@ -1,48 +1,39 @@
-
-//! Это пока херня, потом заменить
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { API_URL } from '../../api/config';
+import { fetchUsers } from '../../api/getUsers';
 
-interface UserState {
-  users: { [key: string]: any }[];
-  loading: boolean;
-  error: string | null;
+interface User {
+  id: number;
+  first_name: string;
+  last_name: string;
+  avatar: string;
 }
 
-const initialState: UserState = {
+interface UsersState {
+  users: User[];
+  status: 'idle' | 'succeeded';
+}
+
+const initialState: UsersState = {
   users: [],
-  loading: false,
-  error: null,
+  status: 'idle',
 };
 
-export const fetchUsers = createAsyncThunk(
-  'users/fetchUsers',
-  async () => {
-    const response = await axios.get(`${API_URL}/users`);
-    return response.data;
-  }
-);
+// Асинхронное действие для получения пользователей
+export const getUsers = createAsyncThunk('users/getUsers', async () => {
+  const users = await fetchUsers();
+  return users;
+});
 
-export const usersSlice = createSlice({
+const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.status = 'succeeded';
         state.users = action.payload;
-        state.loading = false;
       })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.error = action.error.message || 'Failed to fetch users';
-        state.loading = false;
-      });
   },
 });
 

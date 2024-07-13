@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
+
+// hooks
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import useAuthEffect from '../hooks/useAuthEffect';
 
 import { logIn, register } from '../sclices/auth/authSlice';
 import EmailInput from '../components/Authentification/EmailInput';
@@ -12,15 +15,10 @@ const AuthForm: React.FC = () => {
   const dispatch = useAppDispatch();
 
   // Получаем текущие значения полей email и password из состояния
-  const { mode, email, password, confirmPassword, emailError, passwordError, confirmPasswordError } = useAppSelector((state) => state.authForm);
+  const { mode, email, password, emailError, passwordError, confirmPasswordError } = useAppSelector((state) => state.authForm);
 
-  useEffect(() => {
-    // Восстанавливаем состояние из localStorage при монтировании компонента
-    const token = localStorage.getItem('token');
-    if (token) {
-      dispatch({ type: 'auth/logIn/fulfilled', payload: { token } });
-    }
-  }, [dispatch]);
+  // Восстанавливаем состояние аутентификации из localStorage при монтировании компонента
+  useAuthEffect();
 
   // Обработчик для входа
   const handleLogIn = () => {

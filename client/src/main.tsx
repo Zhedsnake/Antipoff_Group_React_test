@@ -21,9 +21,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <GuestGuard>
         <Homepage />
-      </GuestGuard>
     ),
   },
   {
