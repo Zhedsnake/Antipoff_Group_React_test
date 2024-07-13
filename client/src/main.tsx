@@ -12,6 +12,7 @@ import store from './store';
 // Pages
 import Homepage from "./pages/App";
 import Authentification from "./pages/Authentification";
+import UserDetail from "./pages/UserDetail";
 
 // Guards
 import GuestGuard from './components/guards/GuestGuard';
@@ -22,6 +23,12 @@ const router = createBrowserRouter([
     path: "/",
     element: (
         <Homepage />
+    ),
+  },
+  {
+    path: "/user-detail/:userId",
+    element: (
+        <UserDetail />
     ),
   },
   {

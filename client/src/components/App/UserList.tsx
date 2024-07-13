@@ -31,8 +31,8 @@ const UserList: React.FC = () => {
       <div className="app__users-container">
         <ul className="app__users-list">
           {users.map((user) => (
-            <Link to={`${API_URL}/api/users/${user.id}`}>
-              <li key={user.id} className="app__user-list-item user-list-item">
+            <li key={user.id} className="app__user-list-item user-list-item">
+                <Link to={`user-detail/${user.id}`}>
                   <div className="user-list-item__container">
                     <div className="user-list-item__image-container">
                       <img className="user-list-item__image" src={user.avatar} alt={`${user.first_name} ${user.last_name}`} />
@@ -41,8 +41,8 @@ const UserList: React.FC = () => {
                       {user.first_name} {user.last_name}
                     </h3>
                   </div>
-              </li>
-            </Link>
+              </Link>
+            </li>
           ))}
         </ul>
       </div>

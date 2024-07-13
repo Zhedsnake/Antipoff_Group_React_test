@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchUsers } from '../../api/getUsers';
+import { fetchUser } from '../../api/getUser';
 
 interface User {
   id: number;
@@ -10,12 +11,14 @@ interface User {
 
 interface UsersState {
   users: User[];
+  user: any,
   status: 'idle' | 'succeeded';
   currentPage: number,
 }
 
 const initialState: UsersState = {
   users: [],
+  user: null,
   status: 'idle',
   currentPage: 1,
 };
@@ -29,6 +32,14 @@ export const getUsers = createAsyncThunk(
   }
 );
 
+export const getUser = createAsyncThunk(
+  'users/getUser',
+  async (id: string) => {
+    const response = await fetchUser(id);
+    return response;
+  }
+);
+
 const usersSlice = createSlice({
   name: 'users',
   initialState,
@@ -38,6 +49,14 @@ const usersSlice = createSlice({
       .addCase(getUsers.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.users = action.payload;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+
+        //!
+        console.log(state.user);
+
+        state.user = action.payload;
       });
   },
 });
