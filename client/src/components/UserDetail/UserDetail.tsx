@@ -4,16 +4,16 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getUser } from '../../sclices/users/usersSlice';
 
 const UserDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { userId } = useParams<{ userId: string }>();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.users.user);
   const status = useAppSelector((state) => state.users.status);
 
   useEffect(() => {
-    if (id) {
-      dispatch(getUser(id));
+    if (userId) {
+      dispatch(getUser(userId));
     }
-  }, [id, dispatch]);
+  }, [userId, dispatch]);
 
   return (
     <div>
