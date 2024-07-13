@@ -93,10 +93,10 @@
 
 .app__users {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding: 48px 80px 165px;
+  padding: 48px 80px 60px;
 }
 
 .app__users-container {
@@ -111,6 +111,7 @@
   display: flex;
   justify-content: center;
   max-width: 1,280px;
+  margin-bottom: 56px;
 }
 
 .app__users-list {
@@ -157,4 +158,24 @@
   background-color: #FFFFFF;
   box-shadow: 0px 1px 3.98px 0px #33333326;
   border-radius: 10px;
+}
+
+.app__user-list-item:hover {
+  border: 2px solid #000000;
+}
+
+.pagination__button {
+  padding: 8px;
+  border: 1px solid #151317;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: #151317;
+}
+
+.app__pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
 }
