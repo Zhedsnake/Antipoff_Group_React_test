@@ -1,4 +1,3 @@
-// src/components/LogoutButton.tsx
 import React from 'react';
 import { useAppDispatch } from '../../hooks/hooks';
 import { logOut } from '../../sclices/auth/authSlice';
@@ -24,4 +23,4 @@ const LogoutButton: React.FC = () => {
   );
 };
 
-export default LogoutButton;
+export { LogoutButton} ;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import LogoutButton from '../../components/Logout/LogoutButton';
+import { LogoutButton } from '../../components/Logout/LogoutButton';
 import HiddenBlock from './HiddenBlock';
 import Description from './Description';
 
