@@ -4,6 +4,8 @@ import useAuthEffect from '../hooks/useAuthEffect';
 
 import UserDetail from '../components/UserDetail/UserDetail';
 
+import '../css/UserDetail.css';
+
 // Guards
 import GuestGuard from '../components/guards/GuestGuard';
 

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 
 // hooks
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import useAuthEffect from '../hooks/useAuthEffect';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import useAuthEffect from '../../hooks/useAuthEffect';
 
-import { logIn, register } from '../sclices/auth/authSlice';
-import EmailInput from '../components/Authentification/EmailInput';
-import PasswordInput from '../components/Authentification/PasswordInput';
-import ConfirmPasswordInput from '../components/Authentification/ConfirmPasswordInput';
-import ModeToggle from '../components/Authentification/ModeToggle';
+import { logIn, register } from '../../sclices/auth/authSlice';
+import EmailInput from '../../components/Authentification/EmailInput';
+import PasswordInput from '../../components/Authentification/PasswordInput';
+import ConfirmPasswordInput from '../../components/Authentification/ConfirmPasswordInput';
+import ModeToggle from '../../components/Authentification/ModeToggle';
 
 const AuthForm: React.FC = () => {
   // Используем dispatch для отправки действий
@@ -35,9 +35,11 @@ const AuthForm: React.FC = () => {
   };
 
   return (
-    <section className="auth__form-container">
-      <header className="auth__inuts-header">
-        {mode === 'login' ? 'Вход' : 'Регистрация'}
+    <main className="auth__form-container">
+      <header className="auth__inputs-header">
+        <h1>
+          {mode === 'login' ? 'Вход' : 'Регистрация'}
+        </h1>
       </header>
       <div className="auth__form-group">
         <label htmlFor="login">Имя</label>
@@ -58,7 +60,7 @@ const AuthForm: React.FC = () => {
         <button className="auth__form-button" onClick={handleLogIn} disabled={!!emailError || !!passwordError}>Войти</button>
       )}
       <ModeToggle />
-    </section>
+    </main>
   );
 };
 
