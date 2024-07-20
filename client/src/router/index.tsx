@@ -1,34 +1,18 @@
-import React from "react";
 
+// Pages
 import UserDetail from "../pages/UserDetail";
 import UserList from "../pages/UserList";
 import Auth from "../pages/Auth";
 
-import {createBrowserRouter} from "react-router-dom";
 
-//! Патом сделать переадрисацию с несуществующих url
+const privateRoutes = [
+    {path: '/', component: <UserList />, exact: true},
+    {path: '/user/:userId', component: <UserDetail />, exact: true},
+]
 
-export const privateRoutes = createBrowserRouter([
-    {
-        path: "/",
-        element: (
-            <UserList />
-        ),
-    },
-    {
-        path: "/user/:userId",
-        element: (
-            <UserDetail />
-        ),
-    },
-]);
+const publicRoutes = [
+    {path: '/auth', component: <Auth />, exact: true},
+]
 
-export const publicRoutes = createBrowserRouter([
-    {
-        path: "/auth",
-        element: (
-            <Auth />
-        ),
-    },
-]);
+export {privateRoutes, publicRoutes};
 

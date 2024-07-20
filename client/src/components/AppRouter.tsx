@@ -1,5 +1,5 @@
 import React from 'react';
-import {RouterProvider} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 
 // router
 import {privateRoutes, publicRoutes} from "../router";
@@ -20,11 +20,35 @@ const AppRouter = () => {
     // }
 
     return (
-        isAuth
-            ?
-                <RouterProvider router={privateRoutes} />
-            :
-                <RouterProvider router={publicRoutes} />
+            isAuth
+                ?
+                <BrowserRouter>
+                    <Routes>
+                        {privateRoutes.map(route =>
+                            <Route
+                                element={route.component}
+                                path={route.path}
+                                // exact={route.exact}
+                                key={route.path}
+                            />
+                        )}
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                    </Routes>
+                </BrowserRouter>
+                :
+                <BrowserRouter>
+                    <Routes>
+                        {publicRoutes.map(route =>
+                            <Route
+                                element={route.component}
+                                path={route.path}
+                                // exact={route.exact}
+                                key={route.path}
+                            />
+                        )}
+                        <Route path="*" element={<Navigate to="/auth" replace />} />
+                    </Routes>
+                </BrowserRouter>
     );
 };
 
