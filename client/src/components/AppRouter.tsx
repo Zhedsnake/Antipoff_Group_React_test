@@ -10,7 +10,6 @@ import {privateRoutes, publicRoutes} from "../router";
 
 
 const AppRouter = () => {
-
     //! Патом сделать экспорт состояний из redux
     const isAuth:boolean = true;
     console.log(`Auth is ${isAuth}`)
@@ -28,7 +27,7 @@ const AppRouter = () => {
                             <Route
                                 element={route.component}
                                 path={route.path}
-                                // exact={route.exact}
+                                exact={route.exact}
                                 key={route.path}
                             />
                         )}
@@ -42,7 +41,7 @@ const AppRouter = () => {
                             <Route
                                 element={route.component}
                                 path={route.path}
-                                // exact={route.exact}
+                                exact={route.exact}
                                 key={route.path}
                             />
                         )}
