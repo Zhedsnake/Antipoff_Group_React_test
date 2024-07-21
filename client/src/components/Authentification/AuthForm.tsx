@@ -32,6 +32,7 @@ const AuthForm: React.FC = () => {
 
     // Обработчик для входа
     const handleLogIn = () => {
+        // e.preventDefault()
     // if (!emailError && !passwordError) {
     //   dispatch(logIn({ email, password }));
     // }
@@ -39,6 +40,7 @@ const AuthForm: React.FC = () => {
 
     // Обработчик для регистрации
     const handleRegister = () => {
+        // e.preventDefault()
     // if (!emailError && !passwordError && !confirmPasswordError) {
     //   dispatch(register({ email, password }));
     // }

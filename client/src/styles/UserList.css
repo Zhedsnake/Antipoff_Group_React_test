@@ -1,3 +1,32 @@
+
+.app__user-list-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 32px 80px 64px;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  background: #512689;
+}
+
+@media (max-width: 791px) {
+  .app__user-list-header {
+    padding: 32px 30px 64px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 535px) {
+  .app__user-list-header {
+    padding: 32px 16px 64px;
+  }
+}
+
+
+
+
 .app {
   display: flex;
   width: 100%;
@@ -17,18 +46,8 @@
   max-width: 1440px;
 }
 
-.app__header {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  padding: 32px 80px 64px;
-  flex-basis: auto;
-  flex-grow: 1;
-  flex-shrink: 1;
-  background: #512689;
-}
 
-.app__description {
+.app__user-list-description {
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -39,7 +58,7 @@
   justify-content: center;
 }
 
-.app__description div {
+.app__user-list-description div {
   display: flex;
   flex-direction: column;
   max-width: 846px;
@@ -52,7 +71,7 @@
 }
 
 @media (min-width: 791px) {
-  .app__description h1 {
+  .app__user-list-description h1 {
     font-size: 64px;
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
@@ -60,46 +79,34 @@
   }
 }
 
-@media (max-width: 791px) {
-  .app__description h1 {
+@media (max-width: 924px) {
+  .app__user-list-description h1 {
     font-size: 40px;
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
     margin-bottom: 16px;
   }
-  .app__header {
-    padding: 32px 30px 64px;
-    display: flex;
-    flex-direction: column-reverse;
-  }
-  .app__header .logout-button {
-    display: flex;
-    flex-direction: row-reverse;
-  }
+
+
   .app__users {
     padding: 48px 30px 165px;
   }
-  .app__description h2 {
+  .app__user-list-description h2 {
     font-size: 16px;
   }
-  .app__description div {
+  .app__user-list-description div {
     margin-top: 16px;
   }
 }
 
 @media (max-width: 751px) {
-  .app__description h1 {
+  .app__user-list-description h1 {
     font-size: 36px;
   }
 }
 
-@media (max-width: 535px) {
-  .app__header {
-    padding: 32px 16px 64px;
-  }
-}
 
-.app__description h2 {
+.app__user-list-description h2 {
   color: #f8f8f8;
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
@@ -190,21 +197,5 @@
 .user-list-item__name {
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
-  color: #151317;
-}
-
-.app__pagination {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
-}
-
-.pagination__button {
-  padding: 8px;
-  border: 1px solid #151317;
-  font-size: 16px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
   color: #151317;
 }

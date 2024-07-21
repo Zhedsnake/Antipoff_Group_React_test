@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const UserListItem: React.FC<{ user: any }> = ({ user }) => {
   return (
-    <li key={user.id} className="app__user-list-item user-list-item">
+    <li className="app__user-list-item user-list-item">
         <Link to={`user-detail/${user.id}`}>
           <div className="user-list-item__container">
             <div className="user-list-item__image-container">

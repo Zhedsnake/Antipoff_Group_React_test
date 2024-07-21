@@ -1,12 +1,12 @@
 
 // Pages
 import UserDetail from "../pages/UserDetail";
-import UserList from "../pages/UserList";
+import UserLists from "../pages/UserLists";
 import Auth from "../pages/Auth";
 
 
 const privateRoutes = [
-    {path: '/', component: <UserList />, exact: true},
+    {path: '/', component: <UserLists />, exact: true},
     {path: '/user/:userId', component: <UserDetail />, exact: true},
 ]
 
