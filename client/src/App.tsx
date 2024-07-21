@@ -9,8 +9,7 @@ import './styles/nule_styles.css';
 import './styles/Imgs_limiter.css';
 import './styles/Authentification.css';
 import './styles/UserList.css';
-// import '../styles/Homepage.css';
-// import '../styles/UserDetail.css';
+import '../styles/UserContainer.css';
 
 
 // Redux

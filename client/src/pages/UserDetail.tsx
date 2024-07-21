@@ -1,14 +1,12 @@
 import React from 'react';
 
-// import UserDetail from '../components/UserDetail/UserDetail';
+import UserContainer from '../components/UserDetail/UserContainer';
 
 
 const App: React.FC = () => {
   
   return (
-      <></>
-
-    // <UserDetail/>
+    <UserContainer/>
   );
 };
 

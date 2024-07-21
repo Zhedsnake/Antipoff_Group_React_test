@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserDetailDescription: React.FC<{ user: any }> = ({ user }) => (
+const UserDescription: React.FC<{ user: any }> = ({ user }) => (
   <div className="user-detail__description">
     <div className="user-detail__description-container">
       <div className="user-detail__img-container">
@@ -14,4 +14,4 @@ const UserDetailDescription: React.FC<{ user: any }> = ({ user }) => (
   </div>
 );
 
-export default UserDetailDescription;
+export default UserDescription;

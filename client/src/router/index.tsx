@@ -1,7 +1,7 @@
 
 // Pages
 import UserDetail from "../pages/UserDetail";
-import UserLists from "../pages/UserLists";
+import UserLists from "../pages/UsersLists";
 import Auth from "../pages/Auth";
 
 
