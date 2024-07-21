@@ -11,7 +11,7 @@ import {privateRoutes, publicRoutes} from "../router";
 
 const AppRouter = () => {
     //! Патом сделать экспорт состояний из redux
-    const isAuth:boolean = true;
+    const isAuth:boolean = false;
     console.log(`Auth is ${isAuth}`)
 
     // if (isLoading) {

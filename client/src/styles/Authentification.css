@@ -1,0 +1,17 @@
+
+.auth {
+  display: grid;
+  grid-template-columns: minmax(0px, 500px);
+  justify-content: center;
+}
+
+.auth__form-container {
+  margin-top: 40px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: grid;
+  row-gap: 10px;
+}

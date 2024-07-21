@@ -1,14 +1,13 @@
 import React from 'react';
-// import AuthForm from '../components/Authentification/AuthForm';
+
+import AuthContainer from "../components/Authentification/AuthContainer";
 
 
 const Auth: React.FC = () => {
-  return (
-      <></>
-    // <div className="Auth">
-    //   <AuthForm />
-    // </div>
-  );
+
+    return (
+        <AuthContainer />
+    );
 };
 
 export default Auth;

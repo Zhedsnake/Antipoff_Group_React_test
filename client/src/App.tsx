@@ -5,13 +5,13 @@ import AppRouter from "./components/AppRouter";
 
 
 // Styles
-// import './styles/nule_styles.css';
-// import './styles/imgs_limiter.css';
-// import './styles/UserList.css';
-// import '../styles/Homepage.css';
-// import '../styles/Authentification.css';
-// import '../styles/LogoutButton.css';
-// import '../styles/UserDetail.css';
+import './styles/nule_styles.css';
+import './styles/imgs_limiter.css';
+import './styles/Authentification.css';
+// import './styles/UserList.styles';
+// import '../styles/Homepage.styles';
+// import '../styles/LogoutButton.styles';
+// import '../styles/UserDetail.styles';
 
 
 // Redux

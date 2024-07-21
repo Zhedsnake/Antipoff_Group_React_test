@@ -4,7 +4,7 @@ import { logOut } from '../../sclices/auth/authSlice';
 
 import logoutIcon from '../../img/logout-icon.svg';
 
-import '../../css/LogoutButton.css';
+import '../../styles/LogoutButton.css';
 
 const LogoutButton: React.FC = () => {
   const dispatch = useAppDispatch();
