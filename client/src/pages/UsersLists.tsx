@@ -1,13 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from "react-router-dom";
 
+// import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
-import UsersListContainer from "../components/UsersList/UsersListContainer";
+// import { getUsers } from '../../sclices/users/usersSlice';
+
+import PurpleBackContainer from "../components/UI/purpleBackConteiner/PurpleBackContainer";
+import UsersListHeader from "../components/UsersList/UsersListHeader";
+import Pagination from "../components/UI/pagination/Pagination";
+import UserListItem from "../components/UsersList/UserListItem";
 
 
 const UsersLists: React.FC = () => {
+    // const dispatch = useAppDispatch();
+    // const users = useAppSelector((state) => state.users.users);
+    // const status = useAppSelector((state) => state.users.status);
+    // const currentPage = useAppSelector((state) => state.users.currentPage);
+
+    //! Патом переделать в
+    // useEffect(() => {
+    //   if (status === 'idle') {
+    //     dispatch(getUsers(currentPage));
+    //   }
+    // }, [status, dispatch, currentPage]);
+
+    // const handlePageChange = (page: number) => {
+    //   dispatch(getUsers(page));
+    // };
 
     return (
-        <UsersListContainer/>
+        <div className="app">
+            <main className="app__main">
+                <PurpleBackContainer>
+                    <UsersListHeader />
+                </PurpleBackContainer>
+                {/*<section className="app__users">*/}
+                {/*    <div className="app__users-container">*/}
+                {/*        <ul className="app__users-list">*/}
+                {/*            {users.map((user) => (*/}
+                {/*                <UserListItem key={user.id} user={user} />*/}
+                {/*            ))}*/}
+                {/*        </ul>*/}
+                {/*    </div>*/}
+
+                {/*    //! Патом интегрировать пагинацию*/}
+                {/*  <Pagination*/}
+                {/*      page={page}*/}
+                {/*      totalPages={totalPages}*/}
+                {/*      handlePageChange={handlePageChange}*/}
+                {/*  />*/}
+                {/*</section>*/}
+            </main>
+        </div>
     );
 };
 
