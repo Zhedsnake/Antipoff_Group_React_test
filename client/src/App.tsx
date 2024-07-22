@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 // import React, { useEffect } from 'react';
 
 import AppRouter from "./components/AppRouter";
+import {AuthContext} from "./context";
 
 
 // Styles
@@ -9,8 +10,7 @@ import './styles/nule_styles.css';
 import './styles/Imgs_limiter.css';
 import './styles/Authentification.css';
 import './styles/UserList.css';
-import '../styles/UserContainer.css';
-
+import './styles/UserDetail.css';
 
 // Redux
 // import { Provider } from 'react-redux';
@@ -18,6 +18,9 @@ import '../styles/UserContainer.css';
 
 
 const App: React.FC = () => {
+    const [isAuth, setIsAuth] = useState(false);
+    const [isLoading, setLoading] = useState(true);
+
     // const dispatch = useAppDispatch();
 
     // Проверка состояния аутентификации
@@ -34,10 +37,23 @@ const App: React.FC = () => {
     //     // Отключает состояние загрузки
     //     setLoading(false);
     // }, [])
+    
+    useEffect(() => {
+        if (localStorage.getItem('auth')) {
+            setIsAuth(true)
+        }
+        setLoading(false);
+    }, [])
 
     return (
         // <Provider store={store}>
+        <AuthContext.Provider value={{
+            isAuth,
+            setIsAuth,
+            isLoading
+        }}>
             <AppRouter/>
+        </AuthContext.Provider>
         // </Provider>
     );
 };

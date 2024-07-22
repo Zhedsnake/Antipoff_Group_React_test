@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-// import { setConfirmPassword, toggleShowConfirmPassword } from '../../sclices/authForm/authFormSlice';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,23 +10,14 @@ import InputAuth from "../UI/inputAuth/InputAuth";
 import PasswordToggleButton from "../UI/passwordToggleButton/PasswordToggleButton";
 import ErrorForm from "../UI/errorForm/ErrorForm";
 
-const ConfirmPasswordInput: React.FC = () => {
-  // const dispatch = useAppDispatch();
-  // const confirmPassword = useAppSelector((state) => state.authForm.confirmPassword);
-  // const confirmPasswordError = useAppSelector((state) => state.authForm.confirmPasswordError);
-  // const showConfirmPassword = useAppSelector((state) => state.authForm.showConfirmPassword);
-
-  const showConfirmPassword = true;
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const confirmPasswordError = 'Какая-то ошибка';
-  const [toggleShowPassword, setToggleShowConfirmPassword] = useState(true);
+const ConfirmPasswordInput: React.FC = ({confirmPassword, setConfirmPassword, toggleShow, setToggleShow, errors}) => {
 
     return (
         <FormGroupDiv>
             <Label htmlFormName={"confirmPassword"}>Подтвердить пароль</Label>
             <PasswordContainer>
                 <InputAuth
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type={toggleShow.toggleShowConfirmPassword ? 'text' : 'password'}
                     id="confirmPassword"
                     value={confirmPassword}
                     maxLength={30}
@@ -37,12 +25,12 @@ const ConfirmPasswordInput: React.FC = () => {
                 />
                 <PasswordToggleButton
                     type="button"
-                    onClick={() => setToggleShowConfirmPassword(false)}
+                    onClick={() => setToggleShow({...toggleShow, toggleShowConfirmPassword: true})}
                 >
-                    <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                    <FontAwesomeIcon icon={toggleShow.toggleShowConfirmPassword ? faEyeSlash : faEye} />
                 </PasswordToggleButton>
             </PasswordContainer>
-            {confirmPasswordError && <ErrorForm>{confirmPasswordError}</ErrorForm>}
+            {errors.confirmPasswordError && <ErrorForm>{errors.confirmPasswordError}</ErrorForm>}
         </FormGroupDiv>
     );
 };

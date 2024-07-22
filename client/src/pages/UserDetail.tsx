@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 
 import UserHeader from "../components/UserDetail/UserHeader";
 import UserAboutMe from "../components/UserDetail/UserAboutMe";
+import PurpleBackContainer from "../components/UI/purpleBackConteiner/PurpleBackContainer";
 
 
 const App: React.FC = () => {
@@ -24,7 +25,9 @@ const App: React.FC = () => {
     <div className="user-detail">
       {user && (
           <main className="user-detail__main">
-            <UserHeader user={user} />
+            <PurpleBackContainer>
+                <UserHeader user={user} />
+            </PurpleBackContainer>
             <UserAboutMe user={user} />
           </main>
       )}

@@ -1,6 +1,6 @@
 // import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 // import { logInRequest, registerRequest } from '../../api/auth';
-//
+
 // // Интерфейс аутентификации
 // interface AuthState {
 //   isAuthenticated: boolean;
@@ -11,7 +11,7 @@
 //   isAuthenticated: false,
 //   user: null,
 // };
-//
+
 // // Асинхронное действие для входа
 // export const logIn = createAsyncThunk(
 //   'auth/logIn',
@@ -20,7 +20,7 @@
 //     return data;
 //   }
 // );
-//
+
 // // Асинхронное действие для регистрации
 // export const register = createAsyncThunk(
 //   'auth/register',
@@ -29,7 +29,7 @@
 //     return data;
 //   }
 // );
-//
+
 // // Создаем слайс для аутентификации
 // export const authSlice = createSlice({
 //   name: 'auth',
@@ -57,9 +57,9 @@
 //       });
 //   },
 // });
-//
+
 // // Экспортируем действия
 // export const { logOut } = authSlice.actions;
-//
+
 // // Экспортируем редуктор
 // export default authSlice.reducer;

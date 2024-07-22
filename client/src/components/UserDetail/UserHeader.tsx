@@ -6,14 +6,15 @@ import LogoutButton from '../UI/Logout/LogoutButton';
 import PurpleBackContainer from "../UI/purpleBackConteiner/PurpleBackContainer";
 
 
-const UserHeader: React.FC<{ user: any }> = ({ user }) => (
-    <PurpleBackContainer>
-      <header className="user-detail__header">
-        <BackButton />
-        <UserDescription user={user} />
-        <LogoutButton />
-      </header>
-    </PurpleBackContainer>
-);
+const UserHeader: React.FC<{ user: any }> = ({ user }) => {
+
+    return (
+          <header className="user-detail__header">
+            <BackButton />
+            <UserDescription user={user} />
+            <LogoutButton />
+          </header>
+    );
+};
 
 export default UserHeader;

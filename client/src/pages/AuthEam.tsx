@@ -1,40 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import FormButton from "../components/UI/formButton/FormButton";
 import LogInForm from "../components/Authentification/LogInForm";
 import RegForm from "../components/Authentification/RegForm";
 import { useFetching } from "../hooks/useFetching";
 import AuthService from "../api/AuthService";
 import Loader from "../components/UI/Loader/Loader";
-import {AuthContext} from "../context";
 
-// hooks
-// import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-// import { setEmail } from '../../sclices/authForm/authFormSlice';
-// import { setConfirmPassword, toggleShowConfirmPassword } from '../../sclices/authForm/authFormSlice';
-// import { setPassword, toggleShowPassword } from '../../sclices/authForm/authFormSlice';
-// import { logIn, register } from '../../sclices/auth/authSlice';
-// import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-// import { toggleMode } from '../../sclices/authForm/authFormSlice';
-
-
-
-
-const Auth: React.FC = () => {
+const AuthEam: React.FC = () => {
     const [loggedEarlier, setLoggedEarlier] = useState(false);
 
-    const {isAuth, setIsAuth} = useContext(AuthContext);
-
-    // Используем dispatch для отправки действий
-    // const dispatch = useAppDispatch();
-    // Получаем текущие значения полей email и password из состояния
-    // const { mode, email, password, emailError, passwordError, confirmPasswordError } = useAppSelector((state) => state.authForm);
-    // const confirmPassword = useAppSelector((state) => state.authForm.confirmPassword);
-    // const dispatch = useAppDispatch();
-    // const mode = useAppSelector((state) => state.authForm.mode);
-    // const showPassword = useAppSelector((state) => state.authForm.showPassword);
-    // const showConfirmPassword = useAppSelector((state) => state.authForm.showConfirmPassword);
-
-
+    // Reg/Login
     const [logReg, setLogReg] = useState({
         name: '',
         email: '',
@@ -52,16 +27,14 @@ const Auth: React.FC = () => {
         toggleShowConfirmPassword: false,
     });
 
-
-
     const [fetchLogin, isLoginLoading, loginError] = useFetching(async (logReg) => {
         const response = await AuthService.logInRequest(logReg.email, logReg.password);
-        await tokenInBrowser(response.data.data.token);
+        console.log(response);
     });
 
     const [fetchReg, isRegLoading, regError] = useFetching(async (logReg) => {
         const response = await AuthService.registerRequest(logReg.email, logReg.password);
-        await tokenInBrowser(response.data.data.token);
+        console.log(response);
     });
 
     const defaultInputs = () => {
@@ -70,42 +43,31 @@ const Auth: React.FC = () => {
             email: '',
             password: '',
         });
-
         setToggleShow({
             toggleShowPassword: false,
             toggleShowConfirmPassword: false,
         });
-
         setConfirmPassword('');
-    };
-
-    const tokenInBrowser = async (prop) => {
-        await localStorage.setItem('token', prop);
     };
 
     const handleLogIn = async (e: React.FormEvent) => {
         e.preventDefault();
-        await fetchLogin();
-        setIsAuth(true);
+            await fetchLogin(logReg);
     };
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
-        await fetchReg();
-        setIsAuth(true);
-    };
-
-    const handleTogleForm = (prop:boolean) => {
-        defaultInputs();
+            await fetchReg(logReg);
     };
 
     useEffect(() => {
         return () => {
             defaultInputs();
-
         };
     }, []);
 
+    const loginErrorText = "Неверная почта или пароль";
+    const regErrorText = "Чтото пошло не так при регистрации";
 
     return (
         <div className="auth">
@@ -115,7 +77,7 @@ const Auth: React.FC = () => {
                         <Loader />
                     ) : (
                         <>
-                            {loginError && <h1>{loginError}</h1>}
+                            {loginError && <h1>{loginErrorText}</h1>}
                             <LogInForm
                                 handleLogIn={handleLogIn}
                                 defaultInputs={defaultInputs}
@@ -125,7 +87,7 @@ const Auth: React.FC = () => {
                                 toggleShow={toggleShow}
                                 setToggleShow={setToggleShow}
                             />
-                            <FormButton onClick={() => handleTogleForm(false)}>Переключитесь на регистрацию</FormButton>
+                            <FormButton onClick={() => setLoggedEarlier(false)}>Переключитесь на регистрацию</FormButton>
                         </>
                     )
                 ) : (
@@ -133,7 +95,7 @@ const Auth: React.FC = () => {
                         <Loader />
                     ) : (
                         <>
-                            {regError && <h1>{regError}</h1>}
+                            {regError && <h1>{regErrorText}</h1>}
                             <RegForm
                                 handleRegister={handleRegister}
                                 defaultInputs={defaultInputs}
@@ -145,7 +107,7 @@ const Auth: React.FC = () => {
                                 toggleShow={toggleShow}
                                 setToggleShow={setToggleShow}
                             />
-                            <FormButton onClick={() => handleTogleForm(true)}>Переключитесь на вход в систему</FormButton>
+                            <FormButton onClick={() => setLoggedEarlier(true)}>Переключитесь на вход в систему</FormButton>
                         </>
                     )
                 )}
@@ -154,4 +116,4 @@ const Auth: React.FC = () => {
     );
 };
 
-export default Auth;
+export default AuthEam;

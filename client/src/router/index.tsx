@@ -1,8 +1,10 @@
+import React from "react";
 
 // Pages
 import UserDetail from "../pages/UserDetail";
 import UserLists from "../pages/UsersLists";
 import Auth from "../pages/Auth";
+import AuthEam from "../pages/AuthEam";
 
 
 const privateRoutes = [

@@ -5,10 +5,8 @@ import Label from "../UI/label/label";
 import FormGroupDiv from "../UI/formGroupdiv/formGroupdiv";
 import ErrorForm from "../UI/errorForm/ErrorForm";
 
-const NameInput = () => {
+const NameInput = ({logReg, setLogReg, errors}) => {
 
-    const [name, setName] = useState('');
-    const nameError = 'Просто какая-то ошибка';
 
     return (
         <FormGroupDiv>
@@ -16,11 +14,11 @@ const NameInput = () => {
             <InputAuth
                 type="text"
                 id="name"
-                value={name}
+                value={logReg.name}
                 maxLength={30}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setLogReg({...logReg, name: e.target.value})}
             />
-            {nameError && <ErrorForm>{nameError}</ErrorForm>}
+            {errors.nameError && <ErrorForm>{errors.nameError}</ErrorForm>}
         </FormGroupDiv>
     );
 };
