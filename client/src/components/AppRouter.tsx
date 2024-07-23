@@ -1,21 +1,17 @@
 import React, {useContext} from 'react';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 
-// router
 import {privateRoutes, publicRoutes} from "../router";
 import {AuthContext} from "../context";
-
-//! Патом добавить загрузку, когда добавлю redux
-// import Loader from "./UI/Loader/Loader";
-
+import Loader from "./UI/Loader/Loader";
 
 
 const AppRouter = () => {
-    const {isAuth, setIsAuth} = useContext(AuthContext);
+    const {isAuth, isLoading} = useContext(AuthContext);
 
-    // if (isLoading) {
-    //     return <Loader/>
-    // }
+    if (isLoading) {
+        return <Loader/>
+    }
 
     return (
             isAuth

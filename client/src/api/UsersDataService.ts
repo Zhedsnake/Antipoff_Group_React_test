@@ -2,9 +2,9 @@ import axios from 'axios';
 import { API_URL } from './config';
 
 
-export default class UsersDataService {
-    static async getUsersByPagination(page: number = 1) {
-        const response = await axios.get(`${API_URL}/api/users`, {
+export default class StaffDataService {
+    static async getStaffByPagination(page: number) {
+        const response = await axios.get(`${API_URL}/api/users?page=${page}`, {
             params: {
                 page: page
             }
@@ -12,7 +12,7 @@ export default class UsersDataService {
         return response;
     }
 
-    static async getUserById(userId: string) {
+    static async getStaffById(userId: string) {
         const response = await axios.get(`${API_URL}/api/users/${userId}`)
         return response;
     }

@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FormButton from "../components/UI/formButton/FormButton";
 import LogInForm from "../components/Authentification/LogInForm";
 import RegForm from "../components/Authentification/RegForm";
 import { useFetching } from "../hooks/useFetching";
 import AuthService from "../api/AuthService";
 import Loader from "../components/UI/Loader/Loader";
-import {AuthContext} from "../context";
+import { AuthContext } from "../context";
 
 // hooks
 // import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
@@ -21,8 +21,7 @@ import {AuthContext} from "../context";
 
 const Auth: React.FC = () => {
     const [loggedEarlier, setLoggedEarlier] = useState(false);
-
-    const {isAuth, setIsAuth} = useContext(AuthContext);
+    const { isAuth, setIsAuth } = useContext(AuthContext);
 
     // Используем dispatch для отправки действий
     // const dispatch = useAppDispatch();
@@ -52,17 +51,23 @@ const Auth: React.FC = () => {
         toggleShowConfirmPassword: false,
     });
 
-
-
-    const [fetchLogin, isLoginLoading, loginError] = useFetching(async (logReg) => {
+    const [fetchLogin, isLoginLoading, loginError] = useFetching(async () => {
         const response = await AuthService.logInRequest(logReg.email, logReg.password);
-        await tokenInBrowser(response.data.data.token);
+        await tokenInBrowser(response.data.token);
     });
 
-    const [fetchReg, isRegLoading, regError] = useFetching(async (logReg) => {
+    const [fetchReg, isRegLoading, regError] = useFetching(async () => {
         const response = await AuthService.registerRequest(logReg.email, logReg.password);
-        await tokenInBrowser(response.data.data.token);
+        await tokenInBrowser(response.data.token);
     });
+
+    const tokenInBrowser = async (prop: string) => {
+        await localStorage.setItem('token', prop);
+
+        if (localStorage.getItem('token')) {
+            setIsAuth(true);
+        }
+    };
 
     const defaultInputs = () => {
         setLogReg({
@@ -79,33 +84,26 @@ const Auth: React.FC = () => {
         setConfirmPassword('');
     };
 
-    const tokenInBrowser = async (prop) => {
-        await localStorage.setItem('token', prop);
-    };
-
     const handleLogIn = async (e: React.FormEvent) => {
         e.preventDefault();
         await fetchLogin();
-        setIsAuth(true);
     };
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         await fetchReg();
-        setIsAuth(true);
     };
 
-    const handleTogleForm = (prop:boolean) => {
+    const handleTogleForm = (prop: boolean) => {
         defaultInputs();
+        setLoggedEarlier(prop);
     };
 
     useEffect(() => {
         return () => {
             defaultInputs();
-
         };
     }, []);
-
 
     return (
         <div className="auth">

@@ -1,8 +1,8 @@
 import React from "react";
 
 // Pages
-import UserDetail from "../pages/UserDetail";
-import UserLists from "../pages/UsersLists";
+import UserDetail from "../pages/StaffDetail";
+import UserLists from "../pages/Staff";
 import Auth from "../pages/Auth";
 import AuthEam from "../pages/AuthEam";
 

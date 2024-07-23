@@ -18,30 +18,20 @@ import './styles/UserDetail.css';
 
 
 const App: React.FC = () => {
+
+    //! Патом поменять на false
     const [isAuth, setIsAuth] = useState(false);
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
 
-    // const dispatch = useAppDispatch();
-
-    // Проверка состояния аутентификации
-    //! Патом добавить состояния в redux
-    // useEffect(() => {
-    //     const token = localStorage.getItem('auth');
-    //
-    //         if (token) {
-    //             //!Наверное патом нужно будет это переделать
-    //             dispatch({ type: 'auth/logIn/fulfilled', payload: { token } });
-    //             // Ставит состояние аутенсификации на да
-    //             setIsAuth(true);
-    //         }
-    //     // Отключает состояние загрузки
-    //     setLoading(false);
-    // }, [])
-    
     useEffect(() => {
-        if (localStorage.getItem('auth')) {
-            setIsAuth(true)
-        }
+        setLoading(true)
+        const token = localStorage.getItem('token');
+        console.log(token);
+
+            if (token) {
+                setIsAuth(true);
+                console.log(isAuth);
+            }
         setLoading(false);
     }, [])
 

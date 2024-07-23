@@ -1,8 +1,9 @@
 import React from 'react';
 import classes from "./pagination.module.css";
+import {useGetPagination} from "../../../hooks/useGetPagination";
 
 const Pagination = ({totalPages, page, handlePageChange}) => {
-    let pagesArray = getPagesArray(totalPages);
+    let pagesArray = useGetPagination(totalPages);
 
   return (
     <div className={classes.page__wrapper}>

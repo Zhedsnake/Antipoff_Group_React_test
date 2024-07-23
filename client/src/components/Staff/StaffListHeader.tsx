@@ -4,7 +4,7 @@ import React from 'react';
 import LogoutButton from '../UI/Logout/LogoutButton';
 
 
-const UsersListHeader: React.FC = () => {
+const StaffListHeader: React.FC = () => {
 
     return (
         <header className="app__user-list-header">
@@ -19,4 +19,4 @@ const UsersListHeader: React.FC = () => {
     );
 };
 
-export default UsersListHeader;
+export default StaffListHeader;

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const UserListItem: React.FC<{ user: any }> = ({ user }) => {
+const StaffListItem: React.FC = ({ s }) => {
   return (
     <li className="app__user-list-item user-list-item">
-        <Link to={`user-detail/${user.id}`}>
+        <Link to={`user-detail/${s.id}`}>
           <div className="user-list-item__container">
             <div className="user-list-item__image-container">
-              <img className="user-list-item__image" src={user.avatar} alt={`${user.first_name} ${user.last_name}`} />
+              <img className="user-list-item__image" src={s.avatar} alt={`${s.first_name} ${s.last_name}`} />
             </div>
             <h3 className="user-list-item__name">
-              {user.first_name} {user.last_name}
+              {s.first_name} {s.last_name}
             </h3>
           </div>
       </Link>
@@ -18,4 +18,4 @@ const UserListItem: React.FC<{ user: any }> = ({ user }) => {
   );
 };
 
-export default UserListItem;
+export default StaffListItem;

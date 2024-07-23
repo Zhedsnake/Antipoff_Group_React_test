@@ -4,8 +4,8 @@ import {useParams} from "react-router-dom";
 // import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 // import { getUser } from '../../sclices/users/usersSlice';
 
-import UserHeader from "../components/UserDetail/UserHeader";
-import UserAboutMe from "../components/UserDetail/UserAboutMe";
+import UserHeader from "../components/StaffDetail/UserHeader";
+import UserAboutMe from "../components/StaffDetail/UserAboutMe";
 import PurpleBackContainer from "../components/UI/purpleBackConteiner/PurpleBackContainer";
 
 
