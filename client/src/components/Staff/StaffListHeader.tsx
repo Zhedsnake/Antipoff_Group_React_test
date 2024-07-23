@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import LogoutButton from '../UI/Logout/LogoutButton';
+import LogoutButton from '../UI/LogoutButton/LogoutButton';
 
 
 const StaffListHeader: React.FC = () => {

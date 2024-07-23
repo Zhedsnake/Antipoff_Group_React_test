@@ -2,8 +2,7 @@ import React from 'react';
 
 import BackButton from '../UI/backButton/BackButton';
 import UserDescription from './UserDescription';
-import LogoutButton from '../UI/Logout/LogoutButton';
-import PurpleBackContainer from "../UI/purpleBackConteiner/PurpleBackContainer";
+import LogoutButton from '../UI/LogoutButton/LogoutButton';
 
 
 const UserHeader: React.FC<{ user: any }> = ({ user }) => {

@@ -1,25 +1,18 @@
 import React, {useEffect, useState} from 'react';
-
-// import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-// import { getUsers } from '../../sclices/users/usersSlice';
-
 import PurpleBackContainer from "../components/UI/purpleBackConteiner/PurpleBackContainer";
 import StaffListHeader from "../components/Staff/StaffListHeader";
 import Pagination from "../components/UI/pagination/Pagination";
 import {useFetching} from "../hooks/useFetching";
 import Loader from "../components/UI/Loader/Loader";
-import StaffLIst from "../components/Staff/StaffLIst";
-import StaffDataService from "../api/UsersDataService";
+import StaffsLIst from "../components/Staff/StaffsLIst";
+import StaffDataService from "../api/StaffsDataService";
 
 
+const Staffs: React.FC = () => {
 
-const Staff: React.FC = () => {
-    // const dispatch = useAppDispatch();
     // const users = useAppSelector((state) => state.users.users);
     // const status = useAppSelector((state) => state.users.status);
     // const currentPage = useAppSelector((state) => state.users.currentPage);
-
-
     //! Использовать для отправки формы и отслеживания загрузки с ошибкой
     // const [fetchUsers, isUsersLoading, usersError] = useFetching(async (page) => {
     //     const response = await UsersData.getUsersByPagination(page);
@@ -34,12 +27,12 @@ const Staff: React.FC = () => {
 
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    const [limit, setLimit] = useState(8);
-    const [staff, setStaff] = useState([]);
+    // const [limit, setLimit] = useState(8);
+    const [staffs, setStaffs] = useState([]);
 
-    const [fetchStaff, isStaffLoading, staffError] = useFetching(async (page) => {
-        const response = await StaffDataService.getStaffByPagination(page);
-        await setStaff(response.data.data)
+    const [fetchStaffs, isStaffsLoading, staffsError] = useFetching(async (page) => {
+        const response = await StaffDataService.getStaffsByPagination(page);
+        await setStaffs(response.data.data)
         const totalCount = response.data['total_pages'];
         await setTotalPages(totalCount);
         // await setTotalPages(useGetPagination(totalCount, limit));
@@ -47,7 +40,7 @@ const Staff: React.FC = () => {
 
 
     useEffect(() => {
-        fetchStaff(page)
+        fetchStaffs(page)
     }, [page]);
 
     const handlePageChange = (page: number) => {
@@ -62,13 +55,13 @@ const Staff: React.FC = () => {
                     <StaffListHeader />
                 </PurpleBackContainer>
 
-                {isStaffLoading
+                {isStaffsLoading
                 ?
                     <Loader/>
                 :
                     <>
-                        {staffError && <h1>{staffError}</h1>}
-                        <StaffLIst staff={staff}/>
+                        {staffsError && <h1>{staffsError}</h1>}
+                        <StaffsLIst staff={staffs}/>
                         <Pagination
                             page={page}
                             handlePageChange={handlePageChange}
@@ -81,4 +74,4 @@ const Staff: React.FC = () => {
     );
 };
 
-export default Staff;
+export default Staffs;

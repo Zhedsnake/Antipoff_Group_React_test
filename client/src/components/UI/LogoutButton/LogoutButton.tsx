@@ -4,7 +4,7 @@ import classes from "./logoutButton.module.css";
 import {AuthContext} from "../../../context";
 
 const LogoutButton: React.FC = () => {
-    const { isAuth, setIsAuth } = useContext(AuthContext);
+    const { setIsAuth } = useContext(AuthContext);
 
     const handleLogout = () => {
         localStorage.removeItem('token')

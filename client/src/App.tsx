@@ -5,9 +5,9 @@ import {AuthContext} from "./context";
 // Styles
 import './styles/nule_styles.css';
 import './styles/Imgs_limiter.css';
-import './styles/Authentification.css';
-import './styles/UserList.css';
-import './styles/UserDetail.css';
+import './styles/Auth.css';
+import './styles/Stuffs.css';
+import './styles/StaffDetail.css';
 
 // Redux
 // import { Provider } from 'react-redux';

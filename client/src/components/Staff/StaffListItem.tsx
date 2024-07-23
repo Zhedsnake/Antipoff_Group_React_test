@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const StaffListItem: React.FC = ({ s }) => {
   return (
     <li className="app__user-list-item user-list-item">
-        <Link to={`user-detail/${s.id}`}>
+        <Link to={`stuff/${s.id}`}>
           <div className="user-list-item__container">
             <div className="user-list-item__image-container">
               <img className="user-list-item__image" src={s.avatar} alt={`${s.first_name} ${s.last_name}`} />

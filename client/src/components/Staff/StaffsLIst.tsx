@@ -1,7 +1,7 @@
 import React from 'react';
 import StaffListItem from "./StaffListItem";
 
-const StaffLIst = ({staff}) => {
+const StaffsLIst = ({staff}) => {
     return (
         <div className="app__users">
             <div className="app__users-container">
@@ -15,4 +15,4 @@ const StaffLIst = ({staff}) => {
     );
 };
 
-export default StaffLIst;
+export default StaffsLIst;
