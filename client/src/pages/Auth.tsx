@@ -6,6 +6,7 @@ import { useFetching } from "../hooks/useFetching";
 import AuthService from "../api/AuthService";
 import Loader from "../components/UI/Loader/Loader";
 import { AuthContext } from "../context";
+import useToken from "../hooks/useTocken";
 
 // hooks
 // import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
@@ -33,56 +34,48 @@ const Auth: React.FC = () => {
     // const showPassword = useAppSelector((state) => state.authForm.showPassword);
     // const showConfirmPassword = useAppSelector((state) => state.authForm.showConfirmPassword);
 
-
-    const [logReg, setLogReg] = useState({
+    const defLogReg = {
         name: '',
         email: '',
         password: '',
-    });
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [errors, setErrors] = useState({
+    };
+    const defConfirmPassword = { defConf: ''};
+    const defErrors = {
         nameError: '',
         emailError: '',
         passwordError: '',
         confirmPasswordError: '',
-    });
-    const [toggleShow, setToggleShow] = useState({
+    };
+    const defToggleShow = {
         toggleShowPassword: false,
         toggleShowConfirmPassword: false,
-    });
+    };
+
+    const [logReg, setLogReg] = useState({...defLogReg});
+    const [confirmPassword, setConfirmPassword] = useState({...defConfirmPassword});
+    const [errors, setErrors] = useState({...defErrors});
+    const [toggleShow, setToggleShow] = useState({...defToggleShow});
+
+    const defaultInputs = () => {
+        setLogReg({...defLogReg});
+        setConfirmPassword({...defConfirmPassword});
+        setToggleShow({...defToggleShow});
+        setErrors({...defErrors});
+    };
+
 
     const [fetchLogin, isLoginLoading, loginError] = useFetching(async () => {
         const response = await AuthService.logInRequest(logReg.email, logReg.password);
-        await tokenInBrowser(response.data.token);
+        const tokenRepose = useToken('token', response.data.token);
+        setIsAuth(tokenRepose);
     });
 
     const [fetchReg, isRegLoading, regError] = useFetching(async () => {
         const response = await AuthService.registerRequest(logReg.email, logReg.password);
-        await tokenInBrowser(response.data.token);
+        const tokenRepose = useToken('token', response.data.token);
+        setIsAuth(tokenRepose);
     });
 
-    const tokenInBrowser = async (prop: string) => {
-        await localStorage.setItem('token', prop);
-
-        if (localStorage.getItem('token')) {
-            setIsAuth(true);
-        }
-    };
-
-    const defaultInputs = () => {
-        setLogReg({
-            name: '',
-            email: '',
-            password: '',
-        });
-
-        setToggleShow({
-            toggleShowPassword: false,
-            toggleShowConfirmPassword: false,
-        });
-
-        setConfirmPassword('');
-    };
 
     const handleLogIn = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -99,16 +92,23 @@ const Auth: React.FC = () => {
         setLoggedEarlier(prop);
     };
 
+
     useEffect(() => {
         return () => {
             defaultInputs();
         };
     }, []);
 
+
     return (
         <div className="auth">
             <main className="auth__form-container">
+
+
                 {loggedEarlier ? (
+
+                    //! Тут можно передвинуть это в компонент
+                    // ! Тут можно ошибку запихнуть в форму, стилизовать както, если понадобится
                     isLoginLoading ? (
                         <Loader />
                     ) : (
@@ -126,7 +126,11 @@ const Auth: React.FC = () => {
                             <FormButton onClick={() => handleTogleForm(false)}>Переключитесь на регистрацию</FormButton>
                         </>
                     )
+
                 ) : (
+
+                    //! Тут можно передвинуть это в компонент
+                    //! Тут можно ошибку запихнуть в форму, стилизовать както, если понадобится
                     isRegLoading ? (
                         <Loader />
                     ) : (
@@ -137,7 +141,7 @@ const Auth: React.FC = () => {
                                 defaultInputs={defaultInputs}
                                 logReg={logReg}
                                 setLogReg={setLogReg}
-                                confirmPassword={confirmPassword}
+                                confirmPassword={confirmPassword.defConf}
                                 setConfirmPassword={setConfirmPassword}
                                 errors={errors}
                                 toggleShow={toggleShow}

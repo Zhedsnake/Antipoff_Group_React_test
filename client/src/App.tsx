@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react';
-// import React, { useEffect } from 'react';
-
 import AppRouter from "./components/AppRouter";
 import {AuthContext} from "./context";
-
 
 // Styles
 import './styles/nule_styles.css';
@@ -19,19 +16,16 @@ import './styles/UserDetail.css';
 
 const App: React.FC = () => {
 
-    //! Патом поменять на false
     const [isAuth, setIsAuth] = useState(false);
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true)
-        const token = localStorage.getItem('token');
-        console.log(token);
 
-            if (token) {
-                setIsAuth(true);
-                console.log(isAuth);
-            }
+        const token: boolean = !!localStorage.getItem('token');
+
+        setIsAuth(token);
+
         setLoading(false);
     }, [])
 
