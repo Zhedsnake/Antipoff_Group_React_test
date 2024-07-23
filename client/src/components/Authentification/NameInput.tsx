@@ -1,11 +1,17 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 
 import InputAuth from "../UI/inputAuth/InputAuth";
 import Label from "../UI/label/label";
 import FormGroupDiv from "../UI/formGroupdiv/formGroupdiv";
 import ErrorForm from "../UI/errorForm/ErrorForm";
+import {AuthContext} from "../../context";
 
-const NameInput = ({logReg, setLogReg, errors}) => {
+const NameInput = () => {
+    const {
+        logReg,
+        setLogReg,
+        errorsLogReg
+    } = useContext(AuthContext);
 
 
     return (
@@ -18,7 +24,7 @@ const NameInput = ({logReg, setLogReg, errors}) => {
                 maxLength={30}
                 onChange={(e) => setLogReg({...logReg, name: e.target.value})}
             />
-            {errors.nameError && <ErrorForm>{errors.nameError}</ErrorForm>}
+            {errorsLogReg.nameError && <ErrorForm>{errorsLogReg.nameError}</ErrorForm>}
         </FormGroupDiv>
     );
 };

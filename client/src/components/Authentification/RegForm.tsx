@@ -12,26 +12,10 @@ const RegForm = (props) => {
     return (
         <FormAuth>
             <AuthHeader>Регистрация</AuthHeader>
-            <NameInput logReg={props.logReg} setLogReg={props.setLogReg} errors={props.errors} />
-            <EmailInput logReg={props.logReg} setLogReg={props.setLogReg} errors={props.errors} />
-            <PasswordInput
-                logReg={props.logReg}
-                setLogReg={props.setLogReg}
-
-                errors={props.errors}
-
-                toggleShow={props.toggleShow}
-                setToggleShow={props.setToggleShow}
-            />
-            <ConfirmPasswordInput
-                confirmPassword={props.confirmPassword}
-                setConfirmPassword={props.setConfirmPassword}
-
-                errors={props.errors}
-
-                toggleShow={props.toggleShow}
-                setToggleShow={props.setToggleShow}
-            />
+            <NameInput />
+            <EmailInput />
+            <PasswordInput />
+            <ConfirmPasswordInput />
             <FormButton onClick={props.handleRegister}>Зарегистрироваться</FormButton>
         </FormAuth>
     );

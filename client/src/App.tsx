@@ -15,9 +15,38 @@ import './styles/StaffDetail.css';
 
 
 const App: React.FC = () => {
-
     const [isAuth, setIsAuth] = useState(false);
     const [isLoading, setLoading] = useState(false);
+
+    const defLogReg = {
+        name: '',
+        email: '',
+        password: '',
+    };
+    const defConfirmPassword = { defConf: ''};
+    const defLogRegErrors = {
+        nameError: '',
+        emailError: '',
+        passwordError: '',
+        confirmPasswordError: '',
+    };
+    const defToggleShow = {
+        toggleShowPassword: false,
+        toggleShowConfirmPassword: false,
+    };
+
+    const [logReg, setLogReg] = useState({...defLogReg});
+    const [confirmPassword, setConfirmPassword] = useState({...defConfirmPassword});
+    const [errorsLogReg, setErrorsLogReg] = useState({...defLogRegErrors});
+    const [toggleShow, setToggleShow] = useState({...defToggleShow});
+
+    const defaultInputs = () => {
+        setLogReg({...defLogReg});
+        setConfirmPassword({...defConfirmPassword});
+        setToggleShow({...defToggleShow});
+        setErrorsLogReg({...defLogRegErrors});
+    };
+
 
     useEffect(() => {
         setLoading(true)
@@ -34,7 +63,16 @@ const App: React.FC = () => {
         <AuthContext.Provider value={{
             isAuth,
             setIsAuth,
-            isLoading
+            isLoading,
+            defaultInputs,
+            logReg,
+            setLogReg,
+            confirmPassword,
+            setConfirmPassword,
+            errorsLogReg,
+            setErrorsLogReg,
+            toggleShow,
+            setToggleShow
         }}>
             <AppRouter/>
         </AuthContext.Provider>

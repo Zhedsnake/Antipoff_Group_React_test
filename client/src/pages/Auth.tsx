@@ -17,12 +17,14 @@ import useToken from "../hooks/useTocken";
 // import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 // import { toggleMode } from '../../sclices/authForm/authFormSlice';
 
-
-
-
 const Auth: React.FC = () => {
     const [loggedEarlier, setLoggedEarlier] = useState(false);
-    const { isAuth, setIsAuth } = useContext(AuthContext);
+    const {
+        setIsAuth,
+        defaultInputs,
+        logReg,
+    } = useContext(AuthContext);
+
 
     // Используем dispatch для отправки действий
     // const dispatch = useAppDispatch();
@@ -33,35 +35,6 @@ const Auth: React.FC = () => {
     // const mode = useAppSelector((state) => state.authForm.mode);
     // const showPassword = useAppSelector((state) => state.authForm.showPassword);
     // const showConfirmPassword = useAppSelector((state) => state.authForm.showConfirmPassword);
-
-    const defLogReg = {
-        name: '',
-        email: '',
-        password: '',
-    };
-    const defConfirmPassword = { defConf: ''};
-    const defErrors = {
-        nameError: '',
-        emailError: '',
-        passwordError: '',
-        confirmPasswordError: '',
-    };
-    const defToggleShow = {
-        toggleShowPassword: false,
-        toggleShowConfirmPassword: false,
-    };
-
-    const [logReg, setLogReg] = useState({...defLogReg});
-    const [confirmPassword, setConfirmPassword] = useState({...defConfirmPassword});
-    const [errors, setErrors] = useState({...defErrors});
-    const [toggleShow, setToggleShow] = useState({...defToggleShow});
-
-    const defaultInputs = () => {
-        setLogReg({...defLogReg});
-        setConfirmPassword({...defConfirmPassword});
-        setToggleShow({...defToggleShow});
-        setErrors({...defErrors});
-    };
 
 
     const [fetchLogin, isLoginLoading, loginError] = useFetching(async () => {
@@ -116,12 +89,6 @@ const Auth: React.FC = () => {
                             {loginError && <h1>{loginError}</h1>}
                             <LogInForm
                                 handleLogIn={handleLogIn}
-                                defaultInputs={defaultInputs}
-                                logReg={logReg}
-                                setLogReg={setLogReg}
-                                errors={errors}
-                                toggleShow={toggleShow}
-                                setToggleShow={setToggleShow}
                             />
                             <FormButton onClick={() => handleTogleForm(false)}>Переключитесь на регистрацию</FormButton>
                         </>
@@ -138,14 +105,6 @@ const Auth: React.FC = () => {
                             {regError && <h1>{regError}</h1>}
                             <RegForm
                                 handleRegister={handleRegister}
-                                defaultInputs={defaultInputs}
-                                logReg={logReg}
-                                setLogReg={setLogReg}
-                                confirmPassword={confirmPassword.defConf}
-                                setConfirmPassword={setConfirmPassword}
-                                errors={errors}
-                                toggleShow={toggleShow}
-                                setToggleShow={setToggleShow}
                             />
                             <FormButton onClick={() => handleTogleForm(true)}>Переключитесь на вход в систему</FormButton>
                         </>

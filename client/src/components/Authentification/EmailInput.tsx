@@ -1,11 +1,18 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 
 import FormGroupDiv from "../UI/formGroupdiv/formGroupdiv";
 import Label from "../UI/label/label";
 import InputAuth from "../UI/inputAuth/InputAuth";
 import ErrorForm from "../UI/errorForm/ErrorForm";
+import {AuthContext} from "../../context";
 
-const EmailInput = ({logReg, setLogReg, errors}) => {
+const EmailInput = () => {
+    const {
+        logReg,
+        setLogReg,
+        errorsLogReg
+    } = useContext(AuthContext);
+
 
     return (
         <FormGroupDiv>
@@ -17,7 +24,7 @@ const EmailInput = ({logReg, setLogReg, errors}) => {
                 maxLength={30}
                 onChange={(e) => setLogReg({...logReg, email: e.target.value})}
             />
-            {errors.emailError && <ErrorForm>{errors.emailError}</ErrorForm>}
+            {errorsLogReg.emailError && <ErrorForm>{errorsLogReg.emailError}</ErrorForm>}
         </FormGroupDiv>
     );
 };

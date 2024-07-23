@@ -11,17 +11,9 @@ const LogInForm = (props) => {
     return (
         <FormAuth>
             <AuthHeader>Вход</AuthHeader>
-            <NameInput logReg={props.logReg} setLogReg={props.setLogReg} errors={props.errors} />
-            <EmailInput logReg={props.logReg} setLogReg={props.setLogReg} errors={props.errors} />
-            <PasswordInput
-                logReg={props.logReg}
-                setLogReg={props.setLogReg}
-
-                errors={props.errors}
-
-                toggleShow={props.toggleShow}
-                setToggleShow={props.setToggleShow}
-            />
+            <NameInput />
+            <EmailInput />
+            <PasswordInput />
             <FormButton onClick={props.handleLogIn}>Войти</FormButton>
         </FormAuth>
     );

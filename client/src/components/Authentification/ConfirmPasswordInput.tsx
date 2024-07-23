@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -9,8 +9,16 @@ import PasswordContainer from "../UI/passwordContainer/PasswordContainer";
 import InputAuth from "../UI/inputAuth/InputAuth";
 import PasswordToggleButton from "../UI/passwordToggleButton/PasswordToggleButton";
 import ErrorForm from "../UI/errorForm/ErrorForm";
+import {AuthContext} from "../../context";
 
-const ConfirmPasswordInput: React.FC = ({confirmPassword, setConfirmPassword, toggleShow, setToggleShow, errors}) => {
+const ConfirmPasswordInput: React.FC = () => {
+    const {
+        confirmPassword,
+        setConfirmPassword,
+        errorsLogReg,
+        toggleShow,
+        setToggleShow
+    } = useContext(AuthContext);
 
     return (
         <FormGroupDiv>
@@ -19,9 +27,9 @@ const ConfirmPasswordInput: React.FC = ({confirmPassword, setConfirmPassword, to
                 <InputAuth
                     type={toggleShow.toggleShowConfirmPassword ? 'text' : 'password'}
                     id="confirmPassword"
-                    value={confirmPassword}
+                    value={confirmPassword.defConf}
                     maxLength={30}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => setConfirmPassword({...confirmPassword, defConf: e.target.value})}
                 />
                 <PasswordToggleButton
                     type="button"
@@ -30,7 +38,7 @@ const ConfirmPasswordInput: React.FC = ({confirmPassword, setConfirmPassword, to
                     <FontAwesomeIcon icon={toggleShow.toggleShowConfirmPassword ? faEyeSlash : faEye} />
                 </PasswordToggleButton>
             </PasswordContainer>
-            {errors.confirmPasswordError && <ErrorForm>{errors.confirmPasswordError}</ErrorForm>}
+            {errorsLogReg.confirmPasswordError && <ErrorForm>{errorsLogReg.confirmPasswordError}</ErrorForm>}
         </FormGroupDiv>
     );
 };

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -9,8 +9,16 @@ import InputAuth from "../UI/inputAuth/InputAuth";
 import ErrorForm from "../UI/errorForm/ErrorForm";
 import PasswordToggleButton from "../UI/passwordToggleButton/PasswordToggleButton";
 import PasswordContainer from "../UI/passwordContainer/PasswordContainer";
+import {AuthContext} from "../../context";
 
-const PasswordInput: React.FC = ({logReg, setLogReg, toggleShow, setToggleShow, errors}) => {
+const PasswordInput: React.FC = () => {
+    const {
+        logReg,
+        setLogReg,
+        errorsLogReg,
+        toggleShow,
+        setToggleShow
+    } = useContext(AuthContext);
 
     return (
         <FormGroupDiv>
@@ -30,7 +38,7 @@ const PasswordInput: React.FC = ({logReg, setLogReg, toggleShow, setToggleShow, 
                     <FontAwesomeIcon icon={toggleShow.toggleShowPassword ? faEyeSlash : faEye} />
                 </PasswordToggleButton>
             </PasswordContainer>
-            {errors.passwordError && <ErrorForm>{errors.passwordError}</ErrorForm>}
+            {errorsLogReg.passwordError && <ErrorForm>{errorsLogReg.passwordError}</ErrorForm>}
         </FormGroupDiv>
     );
 };
