@@ -3,29 +3,12 @@ import FormButton from "../components/UI/formButton/FormButton";
 import LogInForm from "../components/Authentification/LogInForm";
 import RegForm from "../components/Authentification/RegForm";
 import { useFetching } from "../hooks/useFetching";
-import AuthService from "../api/AuthService";
 import Loader from "../components/UI/Loader/Loader";
 import { AuthContext } from "../context";
 import useToken from "../hooks/useTocken";
 import {AuthContextType} from "../types/AuthContext";
-
-// hooks
-// import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-// import { setEmail } from '../../sclices/authForm/authFormSlice';
-// import { setConfirmPassword, toggleShowConfirmPassword } from '../../sclices/authForm/authFormSlice';
-// import { setPassword, toggleShowPassword } from '../../sclices/authForm/authFormSlice';
-// import { logIn, register } from '../../sclices/auth/authSlice';
-// import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-// import { toggleMode } from '../../sclices/authForm/authFormSlice';
-// Используем dispatch для отправки действий
-// const dispatch = useAppDispatch();
-// Получаем текущие значения полей email и password из состояния
-// const { mode, email, password, emailError, passwordError, confirmPasswordError } = useAppSelector((state) => state.authForm);
-// const confirmPassword = useAppSelector((state) => state.authForm.confirmPassword);
-// const dispatch = useAppDispatch();
-// const mode = useAppSelector((state) => state.authForm.mode);
-// const showPassword = useAppSelector((state) => state.authForm.showPassword);
-// const showConfirmPassword = useAppSelector((state) => state.authForm.showConfirmPassword);
+import {useDispatch, useSelector} from "react-redux";
+import {logInAction, logInRegReducer, registrationAction} from "../store/logInRegReducer";
 
 
 const Auth: React.FC = () => {
@@ -36,16 +19,19 @@ const Auth: React.FC = () => {
         logReg,
     } = useContext<AuthContextType>(AuthContext);
 
+    const dispatch = useDispatch();
+    const token = useSelector(state => state.logInRegReducer.token);
+
 
     const { fetching: fetchLogin, isLoading: isLoginLoading, error: loginError } = useFetching(async () => {
-        const response = await AuthService.logInRequest(logReg.email, logReg.password);
-        const tokenRepose = await useToken('token', response.data.token);
+        dispatch(logInAction(logReg.email, logReg.password))
+        const tokenRepose = await useToken('token', token);
         setIsAuth(tokenRepose);
     });
 
     const { fetching: fetchReg, isLoading: isRegLoading, error: regError } = useFetching(async () => {
-        const response = await AuthService.registerRequest(logReg.email, logReg.password);
-        const tokenRepose = await useToken('token', response.data.token);
+        dispatch(registrationAction(logReg.email, logReg.password))
+        const tokenRepose = await useToken('token', token);
         setIsAuth(tokenRepose);
     });
 

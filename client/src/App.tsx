@@ -13,8 +13,9 @@ import './styles/Stuffs.css';
 import './styles/StaffDetail.css';
 
 // Redux
-// import { Provider } from 'react-redux';
-// import store from './store';
+import { Provider } from 'react-redux';
+import store from "./store";
+
 
 
 const App: React.FC = () => {
@@ -67,24 +68,24 @@ const App: React.FC = () => {
     }
 
     return (
-        // <Provider store={store}>
-        <AuthContext.Provider value ={{
-            isAuth,
-            setIsAuth,
-            isLoading,
-            defaultInputs,
-            logReg,
-            setLogReg,
-            confirmPassword,
-            setConfirmPassword,
-            errorsLogReg,
-            setErrorsLogReg,
-            toggleShow,
-            setToggleShow
-        }}>
-            <AppRouter/>
-        </AuthContext.Provider>
-        // </Provider>
+        <Provider store={store}>
+            <AuthContext.Provider value ={{
+                isAuth,
+                setIsAuth,
+                isLoading,
+                defaultInputs,
+                logReg,
+                setLogReg,
+                confirmPassword,
+                setConfirmPassword,
+                errorsLogReg,
+                setErrorsLogReg,
+                toggleShow,
+                setToggleShow
+            }}>
+                <AppRouter/>
+            </AuthContext.Provider>
+        </Provider>
     );
 };
 
