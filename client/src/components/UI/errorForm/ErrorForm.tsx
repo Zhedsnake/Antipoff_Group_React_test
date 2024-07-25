@@ -2,7 +2,7 @@ import React from 'react';
 import classes from "./errorForm.module.css";
 
 
-type ErrorFormProps = {
+interface ErrorFormProps {
     children: React.ReactNode;
 };
 

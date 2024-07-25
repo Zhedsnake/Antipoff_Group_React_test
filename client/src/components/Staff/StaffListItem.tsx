@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import {IStaff} from "../../types/stuffs";
 
-const StaffListItem: React.FC = ({ s }) => {
+interface StaffProps {
+  s: IStaff
+}
+
+const StaffListItem: React.FC<StaffProps> = ({ s }) => {
   return (
     <li className="app__user-list-item user-list-item">
         <Link to={`stuff/${s.id}`}>

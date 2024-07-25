@@ -1,12 +1,17 @@
 import React from 'react';
 import StaffListItem from "./StaffListItem";
+import {IStaff} from "../../types/stuffs";
 
-const StaffsLIst = ({staff}) => {
+interface StaffsLIstProps {
+    staffs: IStaff[]
+}
+
+const StaffsLIst: React.FC<StaffsLIstProps> = ({staffs}) => {
     return (
         <div className="app__users">
             <div className="app__users-container">
                 <ul className="app__users-list">
-                    {staff.map((s) => (
+                    {staffs.map((s) => (
                         <StaffListItem key={s.id} s={s} />
                     ))}
                 </ul>

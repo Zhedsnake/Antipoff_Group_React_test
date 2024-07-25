@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './AuthHeader.module.css';
 
 
-type AuthHeaderProps = {
+interface AuthHeaderProps {
     children: React.ReactNode;
 };
 

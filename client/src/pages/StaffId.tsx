@@ -6,6 +6,7 @@ import PurpleBackContainer from "../components/UI/purpleBackConteiner/PurpleBack
 import {useFetching} from "../hooks/useFetching";
 import StaffsDataService from "../api/StaffsDataService";
 import Loader from "../components/UI/Loader/Loader";
+import {IStaff} from "../types/stuffs";
 
 
 const StuffId: React.FC = () => {
@@ -16,9 +17,9 @@ const StuffId: React.FC = () => {
 
   const { stuffId } = useParams<{ stuffId: string }>();
 
-  const [staff, setStaff] = useState({});
+  const [staff, setStaff] = useState<IStaff>();
 
-  const [fetchStaff, isStaffLoading, staffError] = useFetching(async (page) => {
+  const { fetching: fetchStaff, isLoading: isStaffLoading, error: staffError } = useFetching(async (page) => {
     const response = await StaffsDataService.getStaffById(stuffId);
     await setStaff(response.data.data)
   })
@@ -38,9 +39,9 @@ const StuffId: React.FC = () => {
             staff && (
                 <main className="user-detail__main">
                   <PurpleBackContainer>
-                    <UserHeader user={staff} />
+                    <UserHeader staff={staff} />
                   </PurpleBackContainer>
-                  <UserAboutMe user={staff} />
+                  <UserAboutMe staff={staff} />
                 </main>
             )
         )}

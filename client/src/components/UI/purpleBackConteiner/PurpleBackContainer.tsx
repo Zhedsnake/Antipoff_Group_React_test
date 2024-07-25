@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from "./purpleBackConteiner.module.css";
 
-type PurpleBackContainerProps = {
+interface PurpleBackContainerProps {
     children: React.ReactNode;
 };
 

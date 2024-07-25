@@ -6,7 +6,11 @@ import EmailInput from "./EmailInput";
 import PasswordInput from "./PasswordInput";
 import FormButton from "../UI/formButton/FormButton";
 
-const LogInForm = (props) => {
+interface HandleLogInType {
+    handleLogIn:(e: React.FormEvent) => Promise<void>;
+}
+
+const LogInForm: React.FC<HandleLogInType> = ({handleLogIn}) => {
 
     return (
         <FormAuth>
@@ -14,7 +18,7 @@ const LogInForm = (props) => {
             <NameInput />
             <EmailInput />
             <PasswordInput />
-            <FormButton onClick={props.handleLogIn}>Войти</FormButton>
+            <FormButton onClick={handleLogIn}>Войти</FormButton>
         </FormAuth>
     );
 };

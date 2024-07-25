@@ -1,9 +1,10 @@
 import React from 'react';
 import classes from "./formButton.module.css";
 
-type FormButtonProps = {
+interface FormButtonProps {
     children: React.ReactNode;
-};
+    onClick: (e: React.FormEvent<HTMLButtonElement>) => void;
+}
 
 const FormButton: React.FC<FormButtonProps> = ({children, ...props}) => {
 

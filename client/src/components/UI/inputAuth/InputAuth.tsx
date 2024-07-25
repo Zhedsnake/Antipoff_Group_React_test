@@ -1,14 +1,18 @@
 import React from 'react';
 
 
-type InputAuthProps = {
-    children: React.ReactNode;
+interface InputAuthProps {
+    type: string;
+    id: string;
+    value: string;
+    maxLength: number;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const InputAuth: React.FC<InputAuthProps> = React.forwardRef((props, ref) => {
+const InputAuth: React.FC<InputAuthProps> = ((props) => {
 
     return (
-        <input ref={ref} {...props}/>
+        <input {...props}/>
     );
 });
 

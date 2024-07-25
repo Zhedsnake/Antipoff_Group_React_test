@@ -2,6 +2,7 @@ import React from 'react';
 
 
 type LabelProps = {
+    htmlFormName: string;
     children: React.ReactNode;
 };
 

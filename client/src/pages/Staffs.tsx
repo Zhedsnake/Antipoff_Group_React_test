@@ -6,31 +6,31 @@ import {useFetching} from "../hooks/useFetching";
 import Loader from "../components/UI/Loader/Loader";
 import StaffsLIst from "../components/Staff/StaffsLIst";
 import StaffDataService from "../api/StaffsDataService";
+import {IStaff} from "../types/stuffs";
 
+
+// const users = useAppSelector((state) => state.users.users);
+// const status = useAppSelector((state) => state.users.status);
+// const currentPage = useAppSelector((state) => state.users.currentPage);
+//! Использовать для отправки формы и отслеживания загрузки с ошибкой
+// const [fetchUsers, isUsersLoading, usersError] = useFetching(async (page) => {
+//     const response = await UsersData.getUsersByPagination(page);
+//
+//     //! Посмотреть что пришло и переделать обработку массива
+//     console.log(response);
+//
+//     setUsers(...response.data.data)
+//     const totalCount = response.headers['total_pages']
+//     setTotalPages(totalCount);
+// })
 
 const Staffs: React.FC = () => {
-
-    // const users = useAppSelector((state) => state.users.users);
-    // const status = useAppSelector((state) => state.users.status);
-    // const currentPage = useAppSelector((state) => state.users.currentPage);
-    //! Использовать для отправки формы и отслеживания загрузки с ошибкой
-    // const [fetchUsers, isUsersLoading, usersError] = useFetching(async (page) => {
-    //     const response = await UsersData.getUsersByPagination(page);
-    //
-    //     //! Посмотреть что пришло и переделать обработку массива
-    //     console.log(response);
-    //
-    //     setUsers(...response.data.data)
-    //     const totalCount = response.headers['total_pages']
-    //     setTotalPages(totalCount);
-    // })
-
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
+    const [page, setPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0);
     // const [limit, setLimit] = useState(8);
-    const [staffs, setStaffs] = useState([]);
+    const [staffs, setStaffs] = useState<IStaff[]>([]);
 
-    const [fetchStaffs, isStaffsLoading, staffsError] = useFetching(async (page) => {
+    const { fetching: fetchStaffs, isLoading: isStaffsLoading, error: staffsError } = useFetching(async (page) => {
         const response = await StaffDataService.getStaffsByPagination(page);
         await setStaffs(response.data.data)
         const totalCount = response.data['total_pages'];
@@ -39,11 +39,11 @@ const Staffs: React.FC = () => {
     })
 
 
-    useEffect(() => {
+    useEffect((): void => {
         fetchStaffs(page)
     }, [page]);
 
-    const handlePageChange = (page: number) => {
+    const handlePageChange = (page: number): void => {
         setPage(page)
     };
 
@@ -61,7 +61,7 @@ const Staffs: React.FC = () => {
                 :
                     <>
                         {staffsError && <h1>{staffsError}</h1>}
-                        <StaffsLIst staff={staffs}/>
+                        <StaffsLIst staffs={staffs}/>
                         <Pagination
                             page={page}
                             handlePageChange={handlePageChange}

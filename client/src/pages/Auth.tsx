@@ -7,6 +7,7 @@ import AuthService from "../api/AuthService";
 import Loader from "../components/UI/Loader/Loader";
 import { AuthContext } from "../context";
 import useToken from "../hooks/useTocken";
+import {AuthContextType} from "../types/AuthContext";
 
 // hooks
 // import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
@@ -16,36 +17,35 @@ import useToken from "../hooks/useTocken";
 // import { logIn, register } from '../../sclices/auth/authSlice';
 // import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 // import { toggleMode } from '../../sclices/authForm/authFormSlice';
+// Используем dispatch для отправки действий
+// const dispatch = useAppDispatch();
+// Получаем текущие значения полей email и password из состояния
+// const { mode, email, password, emailError, passwordError, confirmPasswordError } = useAppSelector((state) => state.authForm);
+// const confirmPassword = useAppSelector((state) => state.authForm.confirmPassword);
+// const dispatch = useAppDispatch();
+// const mode = useAppSelector((state) => state.authForm.mode);
+// const showPassword = useAppSelector((state) => state.authForm.showPassword);
+// const showConfirmPassword = useAppSelector((state) => state.authForm.showConfirmPassword);
+
 
 const Auth: React.FC = () => {
-    const [loggedEarlier, setLoggedEarlier] = useState(false);
+    const [loggedEarlier, setLoggedEarlier] = useState<boolean>(false);
     const {
         setIsAuth,
         defaultInputs,
         logReg,
-    } = useContext(AuthContext);
+    } = useContext<AuthContextType>(AuthContext);
 
 
-    // Используем dispatch для отправки действий
-    // const dispatch = useAppDispatch();
-    // Получаем текущие значения полей email и password из состояния
-    // const { mode, email, password, emailError, passwordError, confirmPasswordError } = useAppSelector((state) => state.authForm);
-    // const confirmPassword = useAppSelector((state) => state.authForm.confirmPassword);
-    // const dispatch = useAppDispatch();
-    // const mode = useAppSelector((state) => state.authForm.mode);
-    // const showPassword = useAppSelector((state) => state.authForm.showPassword);
-    // const showConfirmPassword = useAppSelector((state) => state.authForm.showConfirmPassword);
-
-
-    const [fetchLogin, isLoginLoading, loginError] = useFetching(async () => {
+    const { fetching: fetchLogin, isLoading: isLoginLoading, error: loginError } = useFetching(async () => {
         const response = await AuthService.logInRequest(logReg.email, logReg.password);
-        const tokenRepose = useToken('token', response.data.token);
+        const tokenRepose = await useToken('token', response.data.token);
         setIsAuth(tokenRepose);
     });
 
-    const [fetchReg, isRegLoading, regError] = useFetching(async () => {
+    const { fetching: fetchReg, isLoading: isRegLoading, error: regError } = useFetching(async () => {
         const response = await AuthService.registerRequest(logReg.email, logReg.password);
-        const tokenRepose = useToken('token', response.data.token);
+        const tokenRepose = await useToken('token', response.data.token);
         setIsAuth(tokenRepose);
     });
 
@@ -60,7 +60,7 @@ const Auth: React.FC = () => {
         await fetchReg();
     };
 
-    const handleTogleForm = (prop: boolean) => {
+    const handleToggleForm = (prop: boolean) => {
         defaultInputs();
         setLoggedEarlier(prop);
     };
@@ -90,7 +90,7 @@ const Auth: React.FC = () => {
                             <LogInForm
                                 handleLogIn={handleLogIn}
                             />
-                            <FormButton onClick={() => handleTogleForm(false)}>Переключитесь на регистрацию</FormButton>
+                            <FormButton onClick={() => handleToggleForm(false)}>Переключитесь на регистрацию</FormButton>
                         </>
                     )
 
@@ -106,7 +106,7 @@ const Auth: React.FC = () => {
                             <RegForm
                                 handleRegister={handleRegister}
                             />
-                            <FormButton onClick={() => handleTogleForm(true)}>Переключитесь на вход в систему</FormButton>
+                            <FormButton onClick={() => handleToggleForm(true)}>Переключитесь на вход в систему</FormButton>
                         </>
                     )
                 )}
@@ -114,5 +114,4 @@ const Auth: React.FC = () => {
         </div>
     );
 };
-
 export default Auth;

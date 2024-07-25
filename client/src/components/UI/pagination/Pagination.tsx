@@ -2,8 +2,14 @@ import React from 'react';
 import classes from "./pagination.module.css";
 import {useGetPagination} from "../../../hooks/useGetPagination";
 
-const Pagination = ({totalPages, page, handlePageChange}) => {
-    let pagesArray = useGetPagination(totalPages);
+interface PaginationTypes {
+    totalPages: number,
+    page: number,
+    handlePageChange: (p: number) => void
+}
+
+const Pagination: React.FC<PaginationTypes> = ({totalPages, page, handlePageChange}) => {
+    const pagesArray = useGetPagination(totalPages);
 
   return (
     <div className={classes.page__wrapper}>

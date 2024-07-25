@@ -2,8 +2,8 @@ import {useMemo} from "react";
 
 // Здесь создаётся массив из чисел для пагинации из общего количества страниц
 
-export const useGetPagination = (totalPages: number) => {
-    const countPages = useMemo( () => {
+export const useGetPagination = (totalPages: number): Array<number> => {
+    return useMemo(() => {
         let result = [];
 
         for (let i = 0; i < totalPages; i++) {
@@ -11,7 +11,5 @@ export const useGetPagination = (totalPages: number) => {
         }
 
         return result;
-    }, [totalPages])
-
-    return countPages;
+    }, [totalPages]);
 }

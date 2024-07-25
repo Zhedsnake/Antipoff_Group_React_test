@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import AppRouter from "./components/AppRouter";
 import {AuthContext} from "./context";
+import Loader from "./components/UI/Loader/Loader";
+import {ConfirmPasswordType, LogRegErrorsType, LogRegType, ToggleShowType} from "./types/AuthForm";
+
 
 // Styles
 import './styles/nule_styles.css';
@@ -15,30 +18,30 @@ import './styles/StaffDetail.css';
 
 
 const App: React.FC = () => {
-    const [isAuth, setIsAuth] = useState(false);
-    const [isLoading, setLoading] = useState(false);
+    const [isAuth, setIsAuth] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
 
-    const defLogReg = {
+    const defLogReg: LogRegType = {
         name: '',
         email: '',
         password: '',
     };
-    const defConfirmPassword = { defConf: ''};
-    const defLogRegErrors = {
+    const defConfirmPassword: ConfirmPasswordType = { defConf: ''};
+    const defLogRegErrors: LogRegErrorsType = {
         nameError: '',
         emailError: '',
         passwordError: '',
         confirmPasswordError: '',
     };
-    const defToggleShow = {
+    const defToggleShow: ToggleShowType = {
         toggleShowPassword: false,
-        toggleShowConfirmPassword: false,
+        toggleShowConfirmPassword: false
     };
 
-    const [logReg, setLogReg] = useState({...defLogReg});
-    const [confirmPassword, setConfirmPassword] = useState({...defConfirmPassword});
-    const [errorsLogReg, setErrorsLogReg] = useState({...defLogRegErrors});
-    const [toggleShow, setToggleShow] = useState({...defToggleShow});
+    const [logReg, setLogReg] = useState<LogRegType>({...defLogReg});
+    const [confirmPassword, setConfirmPassword] = useState<ConfirmPasswordType>({...defConfirmPassword});
+    const [errorsLogReg, setErrorsLogReg] = useState<LogRegErrorsType>({...defLogRegErrors});
+    const [toggleShow, setToggleShow] = useState<ToggleShowType>({...defToggleShow});
 
     const defaultInputs = () => {
         setLogReg({...defLogReg});
@@ -48,8 +51,8 @@ const App: React.FC = () => {
     };
 
 
-    useEffect(() => {
-        setLoading(true)
+    useEffect(():void => {
+        setLoading(true);
 
         const token: boolean = !!localStorage.getItem('token');
 
@@ -58,9 +61,14 @@ const App: React.FC = () => {
         setLoading(false);
     }, [])
 
+
+    if (isLoading) {
+        return <Loader/>
+    }
+
     return (
         // <Provider store={store}>
-        <AuthContext.Provider value={{
+        <AuthContext.Provider value ={{
             isAuth,
             setIsAuth,
             isLoading,

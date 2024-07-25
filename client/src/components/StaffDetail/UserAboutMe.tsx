@@ -4,8 +4,10 @@ import UserEmployee from './UserEmployee';
 
 import phoneIcon from "../../img/phone.svg";
 import gmailIcon from "../../img/gmail.svg";
+import {IStaffProps} from "../../types/stuffs";
 
-const UserAboutMe: React.FC<{ user: any }> = ({ user }) => (
+
+const UserAboutMe: React.FC<IStaffProps> = ({ staff }) => (
   <div className="user-detail__about-me-information">
       <div className="user-detail__about-me-information-container">
           <UserEmployee />
@@ -16,7 +18,7 @@ const UserAboutMe: React.FC<{ user: any }> = ({ user }) => (
               </div>
               <div className="user-detail__contacts-item">
                   <img src={gmailIcon} alt="" />
-                  <p>{user.email}</p>
+                  <p>{staff.email}</p>
               </div>
           </div>
       </div>

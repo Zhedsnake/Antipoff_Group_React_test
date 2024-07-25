@@ -1,19 +1,17 @@
 import React from "react";
-
-// Pages
 import UserDetail from "../pages/StaffId";
 import UserLists from "../pages/Staffs";
 import Auth from "../pages/Auth";
-import AuthEam from "../pages/AuthEam";
+import {RoutesTypes} from "../types/router";
 
 
-const privateRoutes = [
-    {path: '/', component: <UserLists />, exact: true},
-    {path: '/stuff/:stuffId', component: <UserDetail />, exact: true},
+const privateRoutes: RoutesTypes[] = [
+    {path: '/', component: <UserLists />},
+    {path: '/stuff/:stuffId', component: <UserDetail />},
 ]
 
-const publicRoutes = [
-    {path: '/auth', component: <Auth />, exact: true},
+const publicRoutes: RoutesTypes[] = [
+    {path: '/auth', component: <Auth />},
 ]
 
 export {privateRoutes, publicRoutes};

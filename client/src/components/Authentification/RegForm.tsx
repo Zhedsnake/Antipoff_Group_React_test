@@ -7,7 +7,11 @@ import PasswordInput from "./PasswordInput";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
 import FormButton from "../UI/formButton/FormButton";
 
-const RegForm = (props) => {
+interface HandleRegisterType {
+    handleRegister:(e: React.FormEvent) => Promise<void>;
+}
+
+const RegForm: React.FC<HandleRegisterType> = ({handleRegister}) => {
 
     return (
         <FormAuth>
@@ -16,7 +20,7 @@ const RegForm = (props) => {
             <EmailInput />
             <PasswordInput />
             <ConfirmPasswordInput />
-            <FormButton onClick={props.handleRegister}>Зарегистрироваться</FormButton>
+            <FormButton onClick={handleRegister}>Зарегистрироваться</FormButton>
         </FormAuth>
     );
 };
