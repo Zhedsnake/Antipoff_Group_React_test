@@ -11,8 +11,8 @@ const StaffsLIst: React.FC<StaffsLIstProps> = ({staffs}) => {
         <div className="app__users">
             <div className="app__users-container">
                 <ul className="app__users-list">
-                    {staffs.map((s) => (
-                        <StaffListItem key={s.id} s={s} />
+                    {staffs.map((staff) => (
+                        staff && <StaffListItem key={staff.id} staff={staff} />
                     ))}
                 </ul>
             </div>

@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {thunk} from "redux-thunk";
 import {logInRegReducer} from "./logInRegReducer";
+import {getStuffsReducer} from "./stuffsReducer";
 
 
 const rootReducer = combineReducers({
-    logInRegReducer
+    logInRegReducer,
+    getStuffsReducer
 })
 
 

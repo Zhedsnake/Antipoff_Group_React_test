@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 import {IStaff} from "../../types/stuffs";
 
 interface StaffProps {
-  s: IStaff
+  staff: IStaff
 }
 
-const StaffListItem: React.FC<StaffProps> = ({ s }) => {
+const StaffListItem: React.FC<StaffProps> = ({ staff }) => {
   return (
     <li className="app__user-list-item user-list-item">
-        <Link to={`stuff/${s.id}`}>
+        <Link to={`stuff/${staff.id}`}>
           <div className="user-list-item__container">
             <div className="user-list-item__image-container">
-              <img className="user-list-item__image" src={s.avatar} alt={`${s.first_name} ${s.last_name}`} />
+              <img className="user-list-item__image" src={staff.avatar} alt={`${staff.first_name} ${staff.last_name}`} />
             </div>
             <h3 className="user-list-item__name">
-              {s.first_name} {s.last_name}
+              {staff.first_name} {staff.last_name}
             </h3>
           </div>
       </Link>

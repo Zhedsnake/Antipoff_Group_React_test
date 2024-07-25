@@ -7,22 +7,10 @@ import Loader from "../components/UI/Loader/Loader";
 import StaffsLIst from "../components/Staff/StaffsLIst";
 import StaffDataService from "../api/StaffsDataService";
 import {IStaff} from "../types/stuffs";
+import {logInAction} from "../store/logInRegReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {getStuffsAction, getStuffsReducer} from "../store/stuffsReducer";
 
-
-// const users = useAppSelector((state) => state.users.users);
-// const status = useAppSelector((state) => state.users.status);
-// const currentPage = useAppSelector((state) => state.users.currentPage);
-//! Использовать для отправки формы и отслеживания загрузки с ошибкой
-// const [fetchUsers, isUsersLoading, usersError] = useFetching(async (page) => {
-//     const response = await UsersData.getUsersByPagination(page);
-//
-//     //! Посмотреть что пришло и переделать обработку массива
-//     console.log(response);
-//
-//     setUsers(...response.data.data)
-//     const totalCount = response.headers['total_pages']
-//     setTotalPages(totalCount);
-// })
 
 const Staffs: React.FC = () => {
     const [page, setPage] = useState<number>(1);
@@ -30,11 +18,32 @@ const Staffs: React.FC = () => {
     // const [limit, setLimit] = useState(8);
     const [staffs, setStaffs] = useState<IStaff[]>([]);
 
+    const staffsTotalPages = useSelector(state => state.getStuffsReducer.total_pages);
+    const staffsData = useSelector(state => state.getStuffsReducer.data);
+
+    useEffect((): void => {
+        if (staffsTotalPages){
+            setTotalPages(staffsTotalPages);
+        }
+    }, [staffsTotalPages]);
+
+    useEffect((): void => {
+        if (staffsData) {
+            setStaffs(staffsData);
+        }
+    }, [staffsData]);
+
+
+
+    const dispatch = useDispatch();
+
     const { fetching: fetchStaffs, isLoading: isStaffsLoading, error: staffsError } = useFetching(async (page) => {
-        const response = await StaffDataService.getStaffsByPagination(page);
-        await setStaffs(response.data.data)
-        const totalCount = response.data['total_pages'];
-        await setTotalPages(totalCount);
+        // const response = await StaffDataService.getStaffsByPagination(page);
+        dispatch(getStuffsAction(page))
+
+        // const totalCount = staffsData.total_pages;
+        // console.log(totalCount);
+        // await setTotalPages(totalCount);
         // await setTotalPages(useGetPagination(totalCount, limit));
     })
 
