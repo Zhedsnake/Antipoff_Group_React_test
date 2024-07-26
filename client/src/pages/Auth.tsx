@@ -28,15 +28,21 @@ const Auth: React.FC = () => {
 
     const { fetching: fetchLogin, isLoading: isLoginLoading, error: loginError } = useFetching(async () => {
         dispatch(logInAction(email, password))
-        const tokenRepose = await useToken('token', token);
-        setIsAuth(tokenRepose);
     });
 
     const { fetching: fetchReg, isLoading: isRegLoading, error: regError } = useFetching(async () => {
         dispatch(registrationAction(email, password))
-        const tokenRepose = await useToken('token', token);
-        setIsAuth(tokenRepose);
     });
+
+    useEffect(() => {
+        const authenticateUser = async () => {
+            if (token) {
+                const tokenResponse = await useToken('token', token);
+                setIsAuth(tokenResponse);
+            }
+        };
+        authenticateUser().then();
+    }, [token]);
 
 
     const handleLogIn = async (e: React.FormEvent) => {
