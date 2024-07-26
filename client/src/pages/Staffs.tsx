@@ -18,8 +18,15 @@ const Staffs: React.FC = () => {
     // const [limit, setLimit] = useState(8);
     const [staffs, setStaffs] = useState<IStaff[]>([]);
 
+    const dispatch = useDispatch();
     const staffsTotalPages = useSelector(state => state.getStuffsReducer.total_pages);
-    const staffsData = useSelector(state => state.getStuffsReducer.data);
+    const staffsData = useSelector(state => state.getStuffsReducer.stuffsData);
+
+
+    const { fetching: fetchStaffs, isLoading: isStaffsLoading, error: staffsError } = useFetching(async (page) => {
+        dispatch(getStuffsAction(page))
+        // await setTotalPages(useGetPagination(totalCount, limit));
+    })
 
     useEffect((): void => {
         if (staffsTotalPages){
@@ -32,21 +39,6 @@ const Staffs: React.FC = () => {
             setStaffs(staffsData);
         }
     }, [staffsData]);
-
-
-
-    const dispatch = useDispatch();
-
-    const { fetching: fetchStaffs, isLoading: isStaffsLoading, error: staffsError } = useFetching(async (page) => {
-        // const response = await StaffDataService.getStaffsByPagination(page);
-        dispatch(getStuffsAction(page))
-
-        // const totalCount = staffsData.total_pages;
-        // console.log(totalCount);
-        // await setTotalPages(totalCount);
-        // await setTotalPages(useGetPagination(totalCount, limit));
-    })
-
 
     useEffect((): void => {
         fetchStaffs(page)

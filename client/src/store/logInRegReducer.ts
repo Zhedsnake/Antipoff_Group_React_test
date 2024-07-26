@@ -10,9 +10,9 @@ const REGISTRATION = "REGISTRATION";
 export const logInRegReducer = (state = defaultLogInRed, action) => {
     switch (action.type) {
         case LOG_IN:
-            return { ...state, token: action.payload };
+            return { ...state, token: action.payload.data.token };
         case REGISTRATION:
-            return { ...state, token: action.payload  };
+            return { ...state, token: action.payload.data.token  };
         default:
             return state;
     }
@@ -20,10 +20,10 @@ export const logInRegReducer = (state = defaultLogInRed, action) => {
 
 export const logInAction = (email, password) => async (dispatch) => {
     const response = await AuthService.logInRequest(email, password);
-    dispatch({ type: LOG_IN, payload: response.data.token });
+    dispatch({ type: LOG_IN, payload: response });
 };
 
 export const registrationAction = (email, password) => async (dispatch) => {
     const response = await AuthService.registerRequest(email, password);
-    dispatch({ type: REGISTRATION, payload: response.data.token });
+    dispatch({ type: REGISTRATION, payload: response });
 };

@@ -7,22 +7,29 @@ import {useFetching} from "../hooks/useFetching";
 import StaffsDataService from "../api/StaffsDataService";
 import Loader from "../components/UI/Loader/Loader";
 import {IStaff} from "../types/stuffs";
+import {getStuffAction, getStuffsAction} from "../store/stuffsReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const StuffId: React.FC = () => {
-
-
   //! Там в header почемуто кнопки не меняются на брейкпоинтах. Потом исправить, если нужно будет.
 
-
+  const dispatch = useDispatch();
   const { stuffId } = useParams<{ stuffId: string }>();
+
+  const staffData = useSelector(state => state.getStuffsReducer.staffData);
 
   const [staff, setStaff] = useState<IStaff>();
 
   const { fetching: fetchStaff, isLoading: isStaffLoading, error: staffError } = useFetching(async (page) => {
-    const response = await StaffsDataService.getStaffById(stuffId);
-    await setStaff(response.data.data)
+    dispatch(getStuffAction(stuffId))
   })
+
+  useEffect((): void => {
+    if (staffData){
+      setStaff(staffData);
+    }
+  }, [staffData]);
 
   useEffect(() => {
     if (stuffId) {

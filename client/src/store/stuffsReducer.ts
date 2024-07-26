@@ -4,19 +4,20 @@ import {IStaff, IStaffsResponse} from "../types/stuffs";
 
 
 const defaultGetStuffs = {
-      data: [null],
-      total_pages: null,
+    stuffsData: [null],
+    total_pages: null,
+    staffData: null
 };
 
 const GET_STUFFS = "GET_STUFFS";
-// const REGISTRATION = "REGISTRATION";
+const GET_STUFF = "GET_STUFF";
 
 export const getStuffsReducer = (state = defaultGetStuffs, action) => {
   switch (action.type) {
     case GET_STUFFS:
-      return { ...state, data: action.payload.data, total_pages: action.payload.total_pages };
-    // case REGISTRATION:
-    //   return { ...state, id: action.payload.id, email: action.payload.email, avatar: action.payload.avatar, first_name: action.payload.first_name, last_name: action.payload.last_name };
+      return { ...state, stuffsData: action.payload.data, total_pages: action.payload.total_pages };
+      case GET_STUFF:
+      return { ...state, staffData: action.payload.data };
     default:
       return state;
   }
@@ -27,8 +28,7 @@ export const getStuffsAction = (page) => async (dispatch) => {
   dispatch({ type: GET_STUFFS, payload: response });
 };
 
-
-// export const getStuffAction = (email, password) => async (dispatch) => {
-//   const response = await AuthService.registerRequest(email, password);
-//   dispatch({ type: REGISTRATION, payload: response.data.token });
-// };
+export const getStuffAction = (stuffId) => async (dispatch) => {
+    const response = await StaffsDataService.getStaffById (stuffId);
+    dispatch({ type: GET_STUFF, payload: response });
+};

@@ -4,7 +4,7 @@ import {IStaffResponse, IStaffsResponse} from "../types/stuffs";
 
 
 export default class StaffsDataService {
-    static async getStaffsByPagination(page: number) {
+    static async getStaffsByPagination(page: number): Promise<IStaffsResponse> {
         const response = await axios.get(`${API_URL}/api/users?page=${page}`, {
             params: {
                 page: page
@@ -13,8 +13,8 @@ export default class StaffsDataService {
         return response.data;
     }
 
-    static async getStaffById(stuffId: string | undefined): Promise<IStaffResponse> {
+    static async getStaffById(stuffId: string): Promise<IStaffResponse> {
         const response = await axios.get(`${API_URL}/api/users/${stuffId}`);
-        return response;
+        return response.data;
     }
 }
