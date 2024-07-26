@@ -21,35 +21,11 @@ import store from "./store";
 const App: React.FC = () => {
     const [isAuth, setIsAuth] = useState<boolean>(false);
     const [isLoading, setLoading] = useState<boolean>(false);
-
-    const defLogReg: LogRegType = {
-        name: '',
-        email: '',
-        password: '',
-    };
-    const defConfirmPassword: ConfirmPasswordType = { defConf: ''};
-    const defLogRegErrors: LogRegErrorsType = {
-        nameError: '',
-        emailError: '',
-        passwordError: '',
-        confirmPasswordError: '',
-    };
     const defToggleShow: ToggleShowType = {
         toggleShowPassword: false,
         toggleShowConfirmPassword: false
     };
-
-    const [logReg, setLogReg] = useState<LogRegType>({...defLogReg});
-    const [confirmPassword, setConfirmPassword] = useState<ConfirmPasswordType>({...defConfirmPassword});
-    const [errorsLogReg, setErrorsLogReg] = useState<LogRegErrorsType>({...defLogRegErrors});
     const [toggleShow, setToggleShow] = useState<ToggleShowType>({...defToggleShow});
-
-    const defaultInputs = () => {
-        setLogReg({...defLogReg});
-        setConfirmPassword({...defConfirmPassword});
-        setToggleShow({...defToggleShow});
-        setErrorsLogReg({...defLogRegErrors});
-    };
 
 
     useEffect(():void => {
@@ -73,15 +49,9 @@ const App: React.FC = () => {
                 isAuth,
                 setIsAuth,
                 isLoading,
-                defaultInputs,
-                logReg,
-                setLogReg,
-                confirmPassword,
-                setConfirmPassword,
-                errorsLogReg,
-                setErrorsLogReg,
                 toggleShow,
-                setToggleShow
+                setToggleShow,
+                defToggleShow
             }}>
                 <AppRouter/>
             </AuthContext.Provider>

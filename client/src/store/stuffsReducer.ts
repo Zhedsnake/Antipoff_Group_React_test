@@ -1,6 +1,4 @@
 import StaffsDataService from "../api/StaffsDataService";
-import {IStaff, IStaffsResponse} from "../types/stuffs";
-
 
 
 const defaultGetStuffs = {
@@ -12,7 +10,7 @@ const defaultGetStuffs = {
 const GET_STUFFS = "GET_STUFFS";
 const GET_STUFF = "GET_STUFF";
 
-export const getStuffsReducer = (state = defaultGetStuffs, action) => {
+export const stuffsReducer = (state = defaultGetStuffs, action) => {
   switch (action.type) {
     case GET_STUFFS:
       return { ...state, stuffsData: action.payload.data, total_pages: action.payload.total_pages };

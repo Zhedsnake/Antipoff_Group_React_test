@@ -9,28 +9,31 @@ import useToken from "../hooks/useTocken";
 import {AuthContextType} from "../types/AuthContext";
 import {useDispatch, useSelector} from "react-redux";
 import {logInAction, logInRegReducer, registrationAction} from "../store/logInRegReducer";
+import {setDefInputs} from "../store/authForm";
 
 
 const Auth: React.FC = () => {
     const [loggedEarlier, setLoggedEarlier] = useState<boolean>(false);
     const {
         setIsAuth,
-        defaultInputs,
-        logReg,
+        setToggleShow,
+        defToggleShow
     } = useContext<AuthContextType>(AuthContext);
 
     const dispatch = useDispatch();
     const token = useSelector(state => state.logInRegReducer.token);
+    const email = useSelector(state => state.authFormReducer.email);
+    const password = useSelector(state => state.authFormReducer.password);
 
 
     const { fetching: fetchLogin, isLoading: isLoginLoading, error: loginError } = useFetching(async () => {
-        dispatch(logInAction(logReg.email, logReg.password))
+        dispatch(logInAction(email, password))
         const tokenRepose = await useToken('token', token);
         setIsAuth(tokenRepose);
     });
 
     const { fetching: fetchReg, isLoading: isRegLoading, error: regError } = useFetching(async () => {
-        dispatch(registrationAction(logReg.email, logReg.password))
+        dispatch(registrationAction(email, password))
         const tokenRepose = await useToken('token', token);
         setIsAuth(tokenRepose);
     });
@@ -47,14 +50,16 @@ const Auth: React.FC = () => {
     };
 
     const handleToggleForm = (prop: boolean) => {
-        defaultInputs();
+        dispatch(setDefInputs())
+        setToggleShow({...defToggleShow});
         setLoggedEarlier(prop);
     };
 
 
     useEffect(() => {
         return () => {
-            defaultInputs();
+            dispatch(setDefInputs())
+            setToggleShow({...defToggleShow});
         };
     }, []);
 

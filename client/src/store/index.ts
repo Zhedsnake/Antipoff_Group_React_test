@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {thunk} from "redux-thunk";
 import {logInRegReducer} from "./logInRegReducer";
-import {getStuffsReducer} from "./stuffsReducer";
+import {stuffsReducer} from "./stuffsReducer";
+import {authFormReducer} from "./authForm";
 
 
 const rootReducer = combineReducers({
     logInRegReducer,
-    getStuffsReducer
+    stuffsReducer,
+    authFormReducer
 })
 
 

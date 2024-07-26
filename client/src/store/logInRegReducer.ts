@@ -10,9 +10,9 @@ const REGISTRATION = "REGISTRATION";
 export const logInRegReducer = (state = defaultLogInRed, action) => {
     switch (action.type) {
         case LOG_IN:
-            return { ...state, token: action.payload.data.token };
+            return { ...state, token: action.payload.token };
         case REGISTRATION:
-            return { ...state, token: action.payload.data.token  };
+            return { ...state, token: action.payload.token  };
         default:
             return state;
     }

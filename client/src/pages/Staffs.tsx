@@ -19,8 +19,8 @@ const Staffs: React.FC = () => {
     const [staffs, setStaffs] = useState<IStaff[]>([]);
 
     const dispatch = useDispatch();
-    const staffsTotalPages = useSelector(state => state.getStuffsReducer.total_pages);
-    const staffsData = useSelector(state => state.getStuffsReducer.stuffsData);
+    const staffsTotalPages = useSelector(state => state.stuffsReducer.total_pages);
+    const staffsData = useSelector(state => state.stuffsReducer.stuffsData);
 
 
     const { fetching: fetchStaffs, isLoading: isStaffsLoading, error: staffsError } = useFetching(async (page) => {

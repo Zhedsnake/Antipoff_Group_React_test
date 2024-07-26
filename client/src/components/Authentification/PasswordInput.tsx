@@ -10,12 +10,15 @@ import ErrorForm from "../UI/errorForm/ErrorForm";
 import PasswordToggleButton from "../UI/passwordToggleButton/PasswordToggleButton";
 import PasswordContainer from "../UI/passwordContainer/PasswordContainer";
 import {AuthContext} from "../../context";
+import {useDispatch, useSelector} from "react-redux";
+import {setPasswordAction} from "../../store/authForm";
 
 const PasswordInput: React.FC = () => {
+    const dispatch = useDispatch();
+    const password = useSelector(state => state.authFormReducer.password);
+    const passwordError = useSelector(state => state.authFormReducer.passwordError);
+
     const {
-        logReg,
-        setLogReg,
-        errorsLogReg,
         toggleShow,
         setToggleShow
     } = useContext(AuthContext);
@@ -27,9 +30,9 @@ const PasswordInput: React.FC = () => {
                 <InputAuth
                   type={toggleShow.toggleShowPassword ? 'text' : 'password'}
                   id="password"
-                  value={logReg.password}
+                  value={password}
                   maxLength={30}
-                  onChange={(e) => setLogReg({...logReg, password: e.target.value})}
+                  onChange={(e) => dispatch(setPasswordAction(e.target.value))}
                 />
                 <PasswordToggleButton
                     type="button"
@@ -38,7 +41,7 @@ const PasswordInput: React.FC = () => {
                     <FontAwesomeIcon icon={toggleShow.toggleShowPassword ? faEyeSlash : faEye} />
                 </PasswordToggleButton>
             </PasswordContainer>
-            {errorsLogReg.passwordError && <ErrorForm>{errorsLogReg.passwordError}</ErrorForm>}
+            {passwordError && <ErrorForm>{passwordError}</ErrorForm>}
         </FormGroupDiv>
     );
 };

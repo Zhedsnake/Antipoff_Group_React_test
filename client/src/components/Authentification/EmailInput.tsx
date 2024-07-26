@@ -5,14 +5,13 @@ import Label from "../UI/label/label";
 import InputAuth from "../UI/inputAuth/InputAuth";
 import ErrorForm from "../UI/errorForm/ErrorForm";
 import {AuthContext} from "../../context";
+import {useDispatch, useSelector} from "react-redux";
+import {setEmailAction, setNameAction} from "../../store/authForm";
 
 const EmailInput = () => {
-    const {
-        logReg,
-        setLogReg,
-        errorsLogReg
-    } = useContext(AuthContext);
-
+    const dispatch = useDispatch();
+    const email = useSelector(state => state.authFormReducer.email);
+    const emailError = useSelector(state => state.authFormReducer.emailError);
 
     return (
         <FormGroupDiv>
@@ -20,11 +19,11 @@ const EmailInput = () => {
             <InputAuth
                 type="email"
                 id="email"
-                value={logReg.email}
+                value={email}
                 maxLength={30}
-                onChange={(e) => setLogReg({...logReg, email: e.target.value})}
+                onChange={(e) => dispatch(setEmailAction(e.target.value))}
             />
-            {errorsLogReg.emailError && <ErrorForm>{errorsLogReg.emailError}</ErrorForm>}
+            {emailError && <ErrorForm>{emailError}</ErrorForm>}
         </FormGroupDiv>
     );
 };

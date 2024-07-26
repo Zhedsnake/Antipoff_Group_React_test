@@ -4,15 +4,13 @@ import InputAuth from "../UI/inputAuth/InputAuth";
 import Label from "../UI/label/label";
 import FormGroupDiv from "../UI/formGroupdiv/formGroupdiv";
 import ErrorForm from "../UI/errorForm/ErrorForm";
-import {AuthContext} from "../../context";
+import {useDispatch, useSelector} from "react-redux";
+import {setNameAction} from "../../store/authForm";
 
 const NameInput = () => {
-    const {
-        logReg,
-        setLogReg,
-        errorsLogReg
-    } = useContext(AuthContext);
-
+    const dispatch = useDispatch();
+    const name = useSelector(state => state.authFormReducer.name);
+    const nameError = useSelector(state => state.authFormReducer.nameError);
 
     return (
         <FormGroupDiv>
@@ -20,11 +18,11 @@ const NameInput = () => {
             <InputAuth
                 type="text"
                 id="name"
-                value={logReg.name}
+                value={name}
                 maxLength={30}
-                onChange={(e) => setLogReg({...logReg, name: e.target.value})}
+                onChange={(e) => dispatch(setNameAction(e.target.value))}
             />
-            {errorsLogReg.nameError && <ErrorForm>{errorsLogReg.nameError}</ErrorForm>}
+            {nameError && <ErrorForm>{nameError}</ErrorForm>}
         </FormGroupDiv>
     );
 };
