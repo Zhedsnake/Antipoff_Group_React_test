@@ -4,10 +4,13 @@ import UserEmployee from './UserEmployee';
 
 import phoneIcon from "../../img/phone.svg";
 import gmailIcon from "../../img/gmail.svg";
-import {IStaffProps} from "../../types/stuffs";
+import {StuffData} from "../../types/stuffsData/stuffData";
 
+interface staffProp {
+    staff: StuffData
+}
 
-const UserAboutMe: React.FC<IStaffProps> = ({ staff }) => (
+const UserAboutMe: React.FC<staffProp> = ({ staff }) => (
   <div className="user-detail__about-me-information">
       <div className="user-detail__about-me-information-container">
           <UserEmployee />

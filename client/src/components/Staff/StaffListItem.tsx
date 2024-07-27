@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import {IStaff} from "../../types/stuffs";
+import {StuffData} from "../../types/stuffsData/stuffData";
 
 interface StaffProps {
-  staff: IStaff
+  staff: StuffData,
 }
 
 const StaffListItem: React.FC<StaffProps> = ({ staff }) => {

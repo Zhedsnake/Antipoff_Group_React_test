@@ -3,37 +3,40 @@ import {useParams} from "react-router-dom";
 import UserHeader from "../components/StaffDetail/UserHeader";
 import UserAboutMe from "../components/StaffDetail/UserAboutMe";
 import PurpleBackContainer from "../components/UI/purpleBackConteiner/PurpleBackContainer";
-import {useFetching} from "../hooks/useFetching";
-import StaffsDataService from "../api/StaffsDataService";
 import Loader from "../components/UI/Loader/Loader";
-import {IStaff} from "../types/stuffs";
-import {getStuffAction, getStuffsAction} from "../store/stuffsReducer";
-import {useDispatch, useSelector} from "react-redux";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useActions} from "../hooks/useActions";
+import {StuffData} from "../types/stuffsData/stuffData";
 
 
 const StuffId: React.FC = () => {
   //! Там в header почемуто кнопки не меняются на брейкпоинтах. Потом исправить, если нужно будет.
 
-  const dispatch = useDispatch();
+
+  const [Staff, setStaff] = useState<StuffData>();
+
   const { stuffId } = useParams<{ stuffId: string }>();
 
-  const staffData = useSelector(state => state.getStuffsReducer.staffData);
+  // const dispatch = useDispatch();
+  // const staffData = useSelector(state => state.getStuffsReducer.staffData);
 
-  const [staff, setStaff] = useState<IStaff>();
+  const {oneStaff, error: staffError, loading: isStaffLoading} = useTypedSelector(state => state.oneStuff)
+  const {getOneStuffAction} = useActions()
 
-  const { fetching: fetchStaff, isLoading: isStaffLoading, error: staffError } = useFetching(async (page) => {
-    dispatch(getStuffAction(stuffId))
-  })
+
+  // const { fetching: fetchStaff, isLoading: isStaffLoading, error: staffError } = useFetching(async (page) => {
+  //   dispatch(getStuffAction(stuffId))
+  // })
 
   useEffect((): void => {
-    if (staffData){
-      setStaff(staffData);
+    if (oneStaff){
+      setStaff(oneStaff);
     }
-  }, [staffData]);
+  }, [oneStaff]);
 
   useEffect(() => {
     if (stuffId) {
-      fetchStaff(stuffId);
+      getOneStuffAction(stuffId);
     }
   }, []);
   
@@ -43,12 +46,12 @@ const StuffId: React.FC = () => {
         ) : staffError ? (
             <h1>{staffError}</h1>
         ) : (
-            staff && (
+            Staff && (
                 <main className="user-detail__main">
                   <PurpleBackContainer>
-                    <UserHeader staff={staff} />
+                    <UserHeader staff={Staff} />
                   </PurpleBackContainer>
-                  <UserAboutMe staff={staff} />
+                  <UserAboutMe staff={Staff} />
                 </main>
             )
         )}

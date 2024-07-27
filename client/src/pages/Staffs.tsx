@@ -2,46 +2,48 @@ import React, {useEffect, useState} from 'react';
 import PurpleBackContainer from "../components/UI/purpleBackConteiner/PurpleBackContainer";
 import StaffListHeader from "../components/Staff/StaffListHeader";
 import Pagination from "../components/UI/pagination/Pagination";
-import {useFetching} from "../hooks/useFetching";
 import Loader from "../components/UI/Loader/Loader";
 import StaffsLIst from "../components/Staff/StaffsLIst";
-import StaffDataService from "../api/StaffsDataService";
-import {IStaff} from "../types/stuffs";
-import {logInAction} from "../store/logInRegReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {getStuffsAction, getStuffsReducer} from "../store/stuffsReducer";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useActions} from "../hooks/useActions";
+import {StuffData} from "../types/stuffsData/stuffData";
 
 
 const Staffs: React.FC = () => {
     const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
     // const [limit, setLimit] = useState(8);
-    const [staffs, setStaffs] = useState<IStaff[]>([]);
 
-    const dispatch = useDispatch();
-    const staffsTotalPages = useSelector(state => state.stuffsReducer.total_pages);
-    const staffsData = useSelector(state => state.stuffsReducer.stuffsData);
+    const [staffs, setStaffs] = useState<StuffData[]>([]);
+
+    // const dispatch = useDispatch();
+    // const staffsTotalPages = useSelector(state => state.stuffsReducer.total_pages);
+    // const staffsData = useSelector(state => state.stuffsReducer.stuffsData);
 
 
-    const { fetching: fetchStaffs, isLoading: isStaffsLoading, error: staffsError } = useFetching(async (page) => {
-        dispatch(getStuffsAction(page))
-        // await setTotalPages(useGetPagination(totalCount, limit));
-    })
+    const {data, error: staffsError, loading: isStaffsLoading} = useTypedSelector(state => state.stuffs)
+    const {getStuffsAction} = useActions()
+
+
+    // const { fetching: fetchStaffs, isLoading: isStaffsLoading, error: staffsError } = useFetching(async (page) => {
+    //     dispatch(getStuffsAction(page))
+    //     await setTotalPages(useGetPagination(totalCount, limit));
+    // })
 
     useEffect((): void => {
-        if (staffsTotalPages){
-            setTotalPages(staffsTotalPages);
+        if (data.total_pages){
+            setTotalPages(data.total_pages);
         }
-    }, [staffsTotalPages]);
+    }, [data.total_pages]);
 
     useEffect((): void => {
-        if (staffsData) {
-            setStaffs(staffsData);
+        if (data.stuffs) {
+            setStaffs(data.stuffs);
         }
-    }, [staffsData]);
+    }, [data.stuffs]);
 
     useEffect((): void => {
-        fetchStaffs(page)
+        getStuffsAction(page)
     }, [page]);
 
     const handlePageChange = (page: number): void => {

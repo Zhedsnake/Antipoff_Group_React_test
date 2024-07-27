@@ -1,9 +1,10 @@
 import React from 'react';
 import StaffListItem from "./StaffListItem";
 import {IStaff} from "../../types/stuffs";
+import {StuffData} from "../../types/stuffsData/stuffData";
 
 interface StaffsLIstProps {
-    staffs: IStaff[]
+    staffs: StuffData[],
 }
 
 const StaffsLIst: React.FC<StaffsLIstProps> = ({staffs}) => {

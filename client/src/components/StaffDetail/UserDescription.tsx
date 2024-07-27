@@ -1,8 +1,15 @@
 import React from 'react';
 import {IStaffProps} from "../../types/stuffs";
+import {StuffData} from "../../types/stuffsData/stuffData";
 
 
-const UserDescription: React.FC<IStaffProps> = ({ staff }) => (
+// Патом поменять принемаемые типы данных на более подробные
+interface staffProps {
+    staff: StuffData
+}
+
+// const UserDescription: React.FC<IStaffProps> = ({ staff }) => (
+const UserDescription: React.FC<staffProps> = ({ staff }) => (
   <div className="user-detail__description">
     <div className="user-detail__description-container">
       <div className="user-detail__img-container">
