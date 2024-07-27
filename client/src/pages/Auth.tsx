@@ -4,12 +4,13 @@ import LogInForm from "../components/Authentification/LogInForm";
 import RegForm from "../components/Authentification/RegForm";
 import { useFetching } from "../hooks/useFetching";
 import Loader from "../components/UI/Loader/Loader";
-import { AuthContext } from "../context";
+import {AuthContext, AuthContextType} from "../context";
 import useToken from "../hooks/useTocken";
-import {AuthContextType} from "../types/AuthContext";
 import {useDispatch, useSelector} from "react-redux";
-import {logInAction, logInRegReducer, registrationAction} from "../store/logInRegReducer";
+import {registrationAction} from "../store/logInRegReducer";
 import {setDefInputs} from "../store/authForm";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useActions} from "../hooks/useActions";
 
 
 const Auth: React.FC = () => {
@@ -21,38 +22,32 @@ const Auth: React.FC = () => {
     } = useContext<AuthContextType>(AuthContext);
 
     const dispatch = useDispatch();
-    const token = useSelector(state => state.logInRegReducer.token);
+    // const token = useSelector(state => state.logInRegReducer.token);
     const email = useSelector(state => state.authFormReducer.email);
     const password = useSelector(state => state.authFormReducer.password);
 
 
-    const { fetching: fetchLogin, isLoading: isLoginLoading, error: loginError } = useFetching(async () => {
-        dispatch(logInAction(email, password))
-    });
+    const {logInToken, logInError, logInLoading} = useTypedSelector(state => state.logIn);
+    const {regToken, regError, regLoading} = useTypedSelector(state => state.registration);
+    const {logInAction, registrationAction} = useActions();
 
-    const { fetching: fetchReg, isLoading: isRegLoading, error: regError } = useFetching(async () => {
-        dispatch(registrationAction(email, password))
-    });
 
-    useEffect(() => {
-        const authenticateUser = async () => {
-            if (token) {
-                const tokenResponse = await useToken('token', token);
-                setIsAuth(tokenResponse);
-            }
-        };
-        authenticateUser().then();
-    }, [token]);
+    // const { fetching: fetchLogin, isLoading: isLoginLoading, error: loginError } = useFetching(async () => {
+    //     dispatch(logInAction(email, password))
+    // });
+    // const { fetching: fetchReg, isLoading: isRegLoading, error: regError } = useFetching(async () => {
+    //     dispatch(registrationAction(email, password))
+    // });
 
 
     const handleLogIn = async (e: React.FormEvent) => {
         e.preventDefault();
-        await fetchLogin();
+        await logInAction(email, password);
     };
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
-        await fetchReg();
+        await registrationAction(email, password);
     };
 
     const handleToggleForm = (prop: boolean) => {
@@ -61,6 +56,25 @@ const Auth: React.FC = () => {
         setLoggedEarlier(prop);
     };
 
+    useEffect(() => {
+        const logInUser = async () => {
+            if (logInToken) {
+                const tokenResponse = await useToken('token', logInToken);
+                setIsAuth(tokenResponse);
+            }
+        };
+        logInUser().then();
+    }, [logInToken]);
+
+    useEffect(() => {
+        const authenticateUser = async () => {
+            if (regToken) {
+                const tokenResponse = await useToken('token', regToken);
+                setIsAuth(tokenResponse);
+            }
+        };
+        authenticateUser().then();
+    }, [regToken]);
 
     useEffect(() => {
         return () => {
@@ -79,11 +93,11 @@ const Auth: React.FC = () => {
 
                     //! Тут можно передвинуть это в компонент
                     // ! Тут можно ошибку запихнуть в форму, стилизовать както, если понадобится
-                    isLoginLoading ? (
+                    logInLoading ? (
                         <Loader />
                     ) : (
                         <>
-                            {loginError && <h1>{loginError}</h1>}
+                            {logInError && <h1>{logInError}</h1>}
                             <LogInForm
                                 handleLogIn={handleLogIn}
                             />
@@ -95,7 +109,7 @@ const Auth: React.FC = () => {
 
                     //! Тут можно передвинуть это в компонент
                     //! Тут можно ошибку запихнуть в форму, стилизовать както, если понадобится
-                    isRegLoading ? (
+                    regLoading ? (
                         <Loader />
                     ) : (
                         <>

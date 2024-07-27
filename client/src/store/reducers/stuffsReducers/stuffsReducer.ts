@@ -1,4 +1,4 @@
-import {StuffsAction, StuffsActionTypes, StuffsState} from "../../types/stuffsData/stuffs";
+import {StuffsAction, StuffsActionTypes, StuffsState} from "../../../types/stuffsData/stuffs";
 
 
 const defaultGetStuffs: StuffsState = {

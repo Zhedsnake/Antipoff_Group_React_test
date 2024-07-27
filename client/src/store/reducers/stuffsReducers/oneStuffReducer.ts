@@ -2,7 +2,7 @@ import {
     OneStuffAction,
     OneStuffActionTypes,
     OneStuffState,
-} from "../../types/stuffsData/oneStuff";
+} from "../../../types/stuffsData/oneStuff";
 
 const initialState: OneStuffState = {
     oneStaff: {

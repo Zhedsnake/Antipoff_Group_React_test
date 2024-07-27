@@ -2,8 +2,13 @@ import React from "react";
 import UserDetail from "../pages/StaffId";
 import UserLists from "../pages/Staffs";
 import Auth from "../pages/Auth";
-import {RoutesTypes} from "../types/router";
 
+
+
+export interface RoutesTypes {
+    path: string,
+    component: React.ReactNode
+}
 
 const privateRoutes: RoutesTypes[] = [
     {path: '/', component: <UserLists />},

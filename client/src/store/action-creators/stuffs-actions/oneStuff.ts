@@ -1,5 +1,5 @@
-import StaffsDataService from "../../api/StaffsDataService";
-import {OneStuffAction, OneStuffActionTypes} from "../../types/stuffsData/oneStuff";
+import StaffsDataService from "../../../api/StaffsDataService";
+import {OneStuffAction, OneStuffActionTypes} from "../../../types/stuffsData/oneStuff";
 import {Dispatch} from "react";
 
 export const getOneStuffAction = (stuffId: string) => {
