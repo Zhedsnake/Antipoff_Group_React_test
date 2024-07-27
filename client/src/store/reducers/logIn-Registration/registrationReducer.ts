@@ -1,12 +1,13 @@
 import {RegistrationAction, RegistrationActionTypes, RegistrationState} from "../../../types/logInRegistration/registration";
+import {LogInActionTypes} from "../../../types/logInRegistration/logIn";
 
-const defaultReg: RegistrationState = {
+const initialState: RegistrationState = {
     regToken: '',
     regLoading: false,
     regError: null,
 };
 
-export const registrationReducer = (state = defaultReg, action: RegistrationAction): RegistrationState => {
+export const registrationReducer = (state = initialState, action: RegistrationAction): RegistrationState => {
     switch (action.type) {
         case RegistrationActionTypes.REGISTRATION:
             return { regLoading: true, regError: null, regToken: '' };
@@ -14,6 +15,8 @@ export const registrationReducer = (state = defaultReg, action: RegistrationActi
             return { regLoading: false, regError: null, regToken: action.payload };
         case RegistrationActionTypes.REGISTRATION_ERROR:
             return { regLoading: false, regError: action.payload, regToken: '' };
+        case RegistrationActionTypes.DEF_REG:
+            return { ...state, ...initialState}
         default:
             return state;
     }

@@ -44,6 +44,8 @@ export const oneStuffReducer = (state = initialState, action: OneStuffAction): O
                     avatar: '',
                 },
             };
+        case OneStuffActionTypes.DEF_ONE_STUFF:
+            return { ...state, ...initialState };
         default:
             return state;
     }

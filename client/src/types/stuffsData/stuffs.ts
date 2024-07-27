@@ -13,6 +13,7 @@ export enum StuffsActionTypes {
     GET_STUFFS = 'GET_STUFFS',
     GET_STUFFS_SUCCESS = 'GET_STUFFS_SUCCESS',
     GET_STUFFS_ERROR = 'GET_STUFFS_ERROR',
+    DEF_STUFFS='DEF_STUFFS',
 }
 interface GetStuffsAction {
     type: StuffsActionTypes.GET_STUFFS;
@@ -28,4 +29,7 @@ interface GetStuffsErrorAction {
     type: StuffsActionTypes.GET_STUFFS_ERROR;
     payload: string;
 }
-export type StuffsAction = GetStuffsAction | GetStuffsSuccessAction | GetStuffsErrorAction
+interface CleanStuffsAction {
+    type: StuffsActionTypes.DEF_STUFFS;
+}
+export type StuffsAction = GetStuffsAction | GetStuffsSuccessAction | GetStuffsErrorAction | CleanStuffsAction

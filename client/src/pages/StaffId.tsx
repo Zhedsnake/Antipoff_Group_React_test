@@ -7,6 +7,7 @@ import Loader from "../components/UI/Loader/Loader";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 import {StuffData} from "../types/stuffsData/stuffData";
+import {setDefInputs} from "../store/authForm";
 
 
 const StuffId: React.FC = () => {
@@ -21,7 +22,7 @@ const StuffId: React.FC = () => {
   // const staffData = useSelector(state => state.getStuffsReducer.staffData);
 
   const {oneStaff, error: staffError, loading: isStaffLoading} = useTypedSelector(state => state.oneStuff)
-  const {getOneStuffAction} = useActions()
+  const {getOneStuffAction, defOneStuff} = useActions()
 
 
   // const { fetching: fetchStaff, isLoading: isStaffLoading, error: staffError } = useFetching(async (page) => {
@@ -38,6 +39,12 @@ const StuffId: React.FC = () => {
     if (stuffId) {
       getOneStuffAction(stuffId);
     }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      defOneStuff()
+    };
   }, []);
   
   return (<div className="user-detail">

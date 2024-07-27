@@ -22,13 +22,18 @@ const Staffs: React.FC = () => {
 
 
     const {data, error: staffsError, loading: isStaffsLoading} = useTypedSelector(state => state.stuffs)
-    const {getStuffsAction} = useActions()
+    const {getStuffsAction, defStuffs} = useActions()
 
 
     // const { fetching: fetchStaffs, isLoading: isStaffsLoading, error: staffsError } = useFetching(async (page) => {
     //     dispatch(getStuffsAction(page))
     //     await setTotalPages(useGetPagination(totalCount, limit));
     // })
+
+
+    const handlePageChange = (page: number): void => {
+        setPage(page)
+    };
 
     useEffect((): void => {
         if (data.total_pages){
@@ -46,10 +51,12 @@ const Staffs: React.FC = () => {
         getStuffsAction(page)
     }, [page]);
 
-    const handlePageChange = (page: number): void => {
-        setPage(page)
-    };
 
+    useEffect(() => {
+        return () => {
+            defStuffs()
+        };
+    }, []);
 
     return (
         <div className="app">

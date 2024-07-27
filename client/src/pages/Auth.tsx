@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setDefInputs} from "../store/authForm";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
+import {defLogIn} from "../store/action-creators/logIn-Registration/defLogIn";
 
 
 const Auth: React.FC = () => {
@@ -28,7 +29,7 @@ const Auth: React.FC = () => {
 
     const {logInToken, logInError, logInLoading} = useTypedSelector(state => state.logIn);
     const {regToken, regError, regLoading} = useTypedSelector(state => state.registration);
-    const {logInAction, registrationAction} = useActions();
+    const {logInAction, registrationAction, defLogIn, defReg} = useActions();
 
 
     // const { fetching: fetchLogin, isLoading: isLoginLoading, error: loginError } = useFetching(async () => {
@@ -37,7 +38,6 @@ const Auth: React.FC = () => {
     // const { fetching: fetchReg, isLoading: isRegLoading, error: regError } = useFetching(async () => {
     //     dispatch(registrationAction(email, password))
     // });
-
 
     const handleLogIn = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -79,6 +79,8 @@ const Auth: React.FC = () => {
         return () => {
             dispatch(setDefInputs())
             setToggleShow({...defToggleShow});
+            defLogIn()
+            defReg()
         };
     }, []);
 

@@ -20,7 +20,7 @@ import store from "./store";
 
 const App: React.FC = () => {
     const [isAuth, setIsAuth] = useState<boolean>(false);
-    const [isLoading, setLoading] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(true);
     const defToggleShow: ToggleShowType = {
         toggleShowPassword: false,
         toggleShowConfirmPassword: false
@@ -28,11 +28,8 @@ const App: React.FC = () => {
     const [toggleShow, setToggleShow] = useState<ToggleShowType>({...defToggleShow});
 
 
-    useEffect(():void => {
-        setLoading(true);
-
+    useEffect(() => {
         const token: boolean = !!localStorage.getItem('token');
-
         setIsAuth(token);
 
         setLoading(false);

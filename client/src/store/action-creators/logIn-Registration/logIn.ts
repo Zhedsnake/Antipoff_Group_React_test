@@ -8,7 +8,7 @@ export const logInAction = (email: string, password: string) => {
         try {
             dispatch({type: LogInActionTypes.LOG_IN})
             const response = await AuthService.logInRequest(email, password);
-            dispatch({type: LogInActionTypes.LOG_IN_SUCCESS, payload: response.data})
+            dispatch({type: LogInActionTypes.LOG_IN_SUCCESS, payload: response.token})
         } catch (e) {
             if (e instanceof Error) {
                 dispatch({

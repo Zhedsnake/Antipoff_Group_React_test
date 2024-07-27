@@ -52,7 +52,7 @@ export const setNameAction = (payload) => ({type: NAME, payload});
 export const setEmailAction = (payload) => ({type: EMAIL, payload});
 export const setPasswordAction = (payload) => ({type: PASSWORD, payload});
 export const setConfirmPasswordAction = (payload) => ({type: CONF_PASSWORD, payload});
-export const setDefInputs = (payload) => ({type: DEF_INPUTS, payload});
+export const setDefInputs = () => ({type: DEF_INPUTS});
 export const setNameErrorAction = (payload) => ({type: NAME_ERROR_PASSWORD, payload});
 export const setEmailErrorAction = (payload) => ({type: EMAIL_ERROR_PASSWORD, payload});
 export const setPasswordErrorAction = (payload) => ({type: PASSWORD_ERROR_PASSWORD, payload});

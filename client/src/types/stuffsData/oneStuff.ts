@@ -9,6 +9,7 @@ export enum OneStuffActionTypes {
     GET_STUFF = 'GET_STUFF',
     GET_STUFF_SUCCESS = 'GET_STUFF_SUCCESS',
     GET_STUFF_ERROR = 'GET_STUFF_ERROR',
+    DEF_ONE_STUFF='DEF_ONE_STUFF',
 }
 interface GetOneStuffAction {
     type: OneStuffActionTypes.GET_STUFF;
@@ -21,4 +22,7 @@ interface GetOneStuffErrorAction {
     type: OneStuffActionTypes.GET_STUFF_ERROR;
     payload: string;
 }
-export type OneStuffAction = GetOneStuffAction | GetOneStuffSuccessAction | GetOneStuffErrorAction
+interface CleanOneStuffAction {
+    type: OneStuffActionTypes.DEF_ONE_STUFF
+}
+export type OneStuffAction = GetOneStuffAction | GetOneStuffSuccessAction | GetOneStuffErrorAction | CleanOneStuffAction

@@ -8,6 +8,7 @@ export enum RegistrationActionTypes {
     REGISTRATION = 'REGISTRATION',
     REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS',
     REGISTRATION_ERROR = 'REGISTRATION_ERROR',
+    DEF_REG='DEF_REG'
 }
 interface PostRegistrationAction {
     type: RegistrationActionTypes.REGISTRATION;
@@ -20,4 +21,7 @@ interface PostRegistrationErrorAction {
     type: RegistrationActionTypes.REGISTRATION_ERROR;
     payload: string;
 }
-export type RegistrationAction = PostRegistrationAction | PostRegistrationSuccessAction | PostRegistrationErrorAction
+interface CleanRegistrationReducerAction {
+    type: RegistrationActionTypes.DEF_REG
+}
+export type RegistrationAction = PostRegistrationAction | PostRegistrationSuccessAction | PostRegistrationErrorAction | CleanRegistrationReducerAction

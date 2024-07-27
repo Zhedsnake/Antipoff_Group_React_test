@@ -1,5 +1,4 @@
 import {createContext, Dispatch, SetStateAction} from "react";
-import {AuthContextType} from "../types/authContext/AuthContext";
 import {ToggleShowType} from "../types/AuthForm";
 
 export interface AuthContextType {

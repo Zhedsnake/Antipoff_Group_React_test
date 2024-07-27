@@ -4,9 +4,9 @@ import classes from "./logoutButton.module.css";
 import {AuthContext} from "../../../context";
 
 const LogoutButton: React.FC = () => {
-    const { setIsAuth } = useContext(AuthContext);
+    const { isAuth, setIsAuth } = useContext(AuthContext);
 
-    const handleLogout = () => {
+    const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
         localStorage.removeItem('token')
         setIsAuth(false);
     };

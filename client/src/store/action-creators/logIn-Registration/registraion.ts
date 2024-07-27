@@ -8,7 +8,7 @@ export const registrationAction = (email: string, password: string) => {
         try {
             dispatch({type: RegistrationActionTypes.REGISTRATION})
             const response = await AuthService.registerRequest(email, password);
-            dispatch({type: RegistrationActionTypes.REGISTRATION_SUCCESS, payload: response.data})
+            dispatch({type: RegistrationActionTypes.REGISTRATION_SUCCESS, payload: response.token})
         } catch (e) {
             if (e instanceof Error) {
                 dispatch({

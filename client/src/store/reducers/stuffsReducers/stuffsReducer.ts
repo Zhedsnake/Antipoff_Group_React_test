@@ -1,7 +1,7 @@
 import {StuffsAction, StuffsActionTypes, StuffsState} from "../../../types/stuffsData/stuffs";
 
 
-const defaultGetStuffs: StuffsState = {
+const initialState: StuffsState = {
     data: {
         stuffs: [
             {
@@ -19,7 +19,7 @@ const defaultGetStuffs: StuffsState = {
 };
 
 
-export const stuffsReducer = (state = defaultGetStuffs, action: StuffsAction): StuffsState => {
+export const stuffsReducer = (state = initialState, action: StuffsAction): StuffsState => {
     switch (action.type) {
         case StuffsActionTypes.GET_STUFFS:
             return {
@@ -57,6 +57,8 @@ export const stuffsReducer = (state = defaultGetStuffs, action: StuffsAction): S
                     total_pages: null,
                 },
             };
+        case StuffsActionTypes.DEF_STUFFS:
+            return { ...state, ...initialState };
         default:
             return state;
     }
