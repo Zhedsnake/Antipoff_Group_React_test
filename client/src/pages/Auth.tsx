@@ -7,7 +7,6 @@ import Loader from "../components/UI/Loader/Loader";
 import {AuthContext, AuthContextType} from "../context";
 import useToken from "../hooks/useTocken";
 import {useDispatch, useSelector} from "react-redux";
-import {registrationAction} from "../store/logInRegReducer";
 import {setDefInputs} from "../store/authForm";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";

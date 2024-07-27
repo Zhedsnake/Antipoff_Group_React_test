@@ -9,11 +9,11 @@ const defaultLogIn: LogInState = {
 export const logInReducer = (state = defaultLogIn, action: LogInAction): LogInState => {
     switch (action.type) {
         case LogInActionTypes.LOG_IN:
-            return { ...state, logInLoading: true };
+            return { logInLoading: true, logInError: null, logInToken: '' };
         case LogInActionTypes.LOG_IN_SUCCESS:
-            return { ...state, logInLoading: false, logInToken: action.payload };
+            return { logInLoading: false, logInError: null, logInToken: action.payload };
         case LogInActionTypes.LOG_IN_ERROR:
-            return { ...state, logInLoading: false, logInToken: action.payload };
+            return { logInLoading: false, logInError: action.payload, logInToken: '' };
         default:
             return state;
     }

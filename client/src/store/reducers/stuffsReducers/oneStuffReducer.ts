@@ -20,11 +20,30 @@ const initialState: OneStuffState = {
 export const oneStuffReducer = (state = initialState, action: OneStuffAction): OneStuffState => {
     switch (action.type) {
         case OneStuffActionTypes.GET_STUFF:
-            return { ...state, loading: true };
+            return {
+                loading: true,
+                error: null,
+                oneStaff: {
+                    id: 0,
+                    email: '',
+                    first_name: '',
+                    last_name: '',
+                    avatar: '',
+                },
+            };
         case OneStuffActionTypes.GET_STUFF_SUCCESS:
-            return { ...state, loading: false, oneStaff: action.payload };
+            return { loading: false, error: null, oneStaff: action.payload };
         case OneStuffActionTypes.GET_STUFF_ERROR:
-            return { ...state, loading: false, error: action.payload };
+            return { loading: false,
+                error: action.payload,
+                oneStaff: {
+                    id: 0,
+                    email: '',
+                    first_name: '',
+                    last_name: '',
+                    avatar: '',
+                },
+            };
         default:
             return state;
     }

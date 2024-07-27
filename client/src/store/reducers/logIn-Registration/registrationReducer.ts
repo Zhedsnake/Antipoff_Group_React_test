@@ -9,11 +9,11 @@ const defaultReg: RegistrationState = {
 export const registrationReducer = (state = defaultReg, action: RegistrationAction): RegistrationState => {
     switch (action.type) {
         case RegistrationActionTypes.REGISTRATION:
-            return { ...state, regLoading: true };
+            return { regLoading: true, regError: null, regToken: '' };
         case RegistrationActionTypes.REGISTRATION_SUCCESS:
-            return { ...state, regLoading: false, regToken: action.payload };
+            return { regLoading: false, regError: null, regToken: action.payload };
         case RegistrationActionTypes.REGISTRATION_ERROR:
-            return { ...state, regLoading: false, regToken: action.payload };
+            return { regLoading: false, regError: action.payload, regToken: '' };
         default:
             return state;
     }
