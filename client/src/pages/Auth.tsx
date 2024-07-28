@@ -2,15 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import FormButton from "../components/UI/formButton/FormButton";
 import LogInForm from "../components/Authentification/LogInForm";
 import RegForm from "../components/Authentification/RegForm";
-import { useFetching } from "../hooks/useFetching";
 import Loader from "../components/UI/Loader/Loader";
 import {AuthContext, AuthContextType} from "../context";
 import useToken from "../hooks/useTocken";
 import {useDispatch, useSelector} from "react-redux";
-import {setDefInputs} from "../store/authForm";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
-import {defLogIn} from "../store/action-creators/logIn-Registration/defLogIn";
 
 
 const Auth: React.FC = () => {
@@ -21,15 +18,16 @@ const Auth: React.FC = () => {
         defToggleShow
     } = useContext<AuthContextType>(AuthContext);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // const token = useSelector(state => state.logInRegReducer.token);
-    const email = useSelector(state => state.authFormReducer.email);
-    const password = useSelector(state => state.authFormReducer.password);
+    // const email = useSelector(state => state.authFormReducer.email);
+    // const password = useSelector(state => state.authFormReducer.password);
 
 
+    const { email, password } = useTypedSelector(state => state.authForm);
     const {logInToken, logInError, logInLoading} = useTypedSelector(state => state.logIn);
     const {regToken, regError, regLoading} = useTypedSelector(state => state.registration);
-    const {logInAction, registrationAction, defLogIn, defReg} = useActions();
+    const {logInAction, registrationAction, defLogIn, defReg, setDefInputs } = useActions();
 
 
     // const { fetching: fetchLogin, isLoading: isLoginLoading, error: loginError } = useFetching(async () => {
@@ -50,7 +48,7 @@ const Auth: React.FC = () => {
     };
 
     const handleToggleForm = (prop: boolean) => {
-        dispatch(setDefInputs())
+        setDefInputs()
         setToggleShow({...defToggleShow});
         setLoggedEarlier(prop);
     };
@@ -77,10 +75,10 @@ const Auth: React.FC = () => {
 
     useEffect(() => {
         return () => {
-            dispatch(setDefInputs())
             setToggleShow({...defToggleShow});
             defLogIn()
             defReg()
+            setDefInputs()
         };
     }, []);
 

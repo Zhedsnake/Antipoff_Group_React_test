@@ -3,7 +3,7 @@ import {oneStuffReducer} from "./stuffsReducers/oneStuffReducer";
 import {stuffsReducer} from "./stuffsReducers/stuffsReducer";
 import {logInReducer} from "./logIn-Registration/logInReducer";
 import {registrationReducer} from "./logIn-Registration/registrationReducer";
-import {authFormReducer} from "../authForm";
+import {authFormReducer} from "./auth-form/authFormReducer";
 
 
 export const rootReducer = combineReducers({
@@ -11,7 +11,7 @@ export const rootReducer = combineReducers({
     stuffs: stuffsReducer,
     logIn: logInReducer,
     registration: registrationReducer,
-    authFormReducer,
+    authForm: authFormReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

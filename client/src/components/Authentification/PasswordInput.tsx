@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -11,17 +11,34 @@ import PasswordToggleButton from "../UI/passwordToggleButton/PasswordToggleButto
 import PasswordContainer from "../UI/passwordContainer/PasswordContainer";
 import {AuthContext} from "../../context";
 import {useDispatch, useSelector} from "react-redux";
-import {setPasswordAction} from "../../store/authForm";
+import {setPasswordAction} from "../../store/authFormReducer";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useActions} from "../../hooks/useActions";
 
 const PasswordInput: React.FC = () => {
-    const dispatch = useDispatch();
-    const password = useSelector(state => state.authFormReducer.password);
-    const passwordError = useSelector(state => state.authFormReducer.passwordError);
-
     const {
         toggleShow,
         setToggleShow
     } = useContext(AuthContext);
+
+    const [passwordForm, setPasswordForm] = useState('');
+    const [passwordErrorForm, setPasswordErrorForm] = useState('');
+
+    const { passwordError } = useTypedSelector(state => state.authForm);
+    const {setPasswordAction} = useActions()
+
+    useEffect(() => {
+        setPasswordAction(passwordForm)
+    }, [passwordForm])
+
+    useEffect(() => {
+        setPasswordErrorForm(passwordError)
+    }, [passwordError])
+
+    const handlerSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPasswordForm(e.target.value)
+    }
+
 
     return (
         <FormGroupDiv>
@@ -30,18 +47,18 @@ const PasswordInput: React.FC = () => {
                 <InputAuth
                   type={toggleShow.toggleShowPassword ? 'text' : 'password'}
                   id="password"
-                  value={password}
+                  value={passwordForm}
                   maxLength={30}
-                  onChange={(e) => dispatch(setPasswordAction(e.target.value))}
+                  onChange={handlerSetPassword}
                 />
                 <PasswordToggleButton
                     type="button"
-                    onClick={() => setToggleShow({...toggleShow, toggleShowPassword: true})}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => setToggleShow({...toggleShow, toggleShowPassword: true})}
                 >
                     <FontAwesomeIcon icon={toggleShow.toggleShowPassword ? faEyeSlash : faEye} />
                 </PasswordToggleButton>
             </PasswordContainer>
-            {passwordError && <ErrorForm>{passwordError}</ErrorForm>}
+            {passwordErrorForm && <ErrorForm>{passwordErrorForm}</ErrorForm>}
         </FormGroupDiv>
     );
 };

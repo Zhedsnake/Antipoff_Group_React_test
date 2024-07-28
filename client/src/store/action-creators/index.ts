@@ -6,6 +6,7 @@ import {defLogIn} from "./logIn-Registration/defLogIn";
 import {defReg} from "./logIn-Registration/defReg";
 import {defStuffs} from "./stuffs-actions/defStuffs";
 import {defOneStuff} from "./stuffs-actions/defOneStuff";
+import * as authFormActions from "./auth-form/authForm";
 
 export default {
     getStuffsAction,
@@ -15,5 +16,6 @@ export default {
     defLogIn,
     defReg,
     defStuffs,
-    defOneStuff
+    defOneStuff,
+    ...authFormActions
 }

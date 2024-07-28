@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 
 import FormGroupDiv from "../UI/formGroupdiv/formGroupdiv";
 import Label from "../UI/label/label";
@@ -6,12 +6,28 @@ import InputAuth from "../UI/inputAuth/InputAuth";
 import ErrorForm from "../UI/errorForm/ErrorForm";
 import {AuthContext} from "../../context";
 import {useDispatch, useSelector} from "react-redux";
-import {setEmailAction, setNameAction} from "../../store/authForm";
+import {setEmailAction, setNameAction} from "../../store/authFormReducer";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useActions} from "../../hooks/useActions";
 
 const EmailInput = () => {
-    const dispatch = useDispatch();
-    const email = useSelector(state => state.authFormReducer.email);
-    const emailError = useSelector(state => state.authFormReducer.emailError);
+    const { emailError } = useTypedSelector(state => state.authForm);
+    const {setEmailAction} = useActions()
+
+    const [emailForm, setEmailForm] = useState('');
+    const [emailErrorForm, setEmailErrorForm] = useState('');
+
+    useEffect(() => {
+        setEmailAction(emailForm)
+    }, [emailForm])
+
+    useEffect(() => {
+        setEmailErrorForm(emailError)
+    }, [emailError])
+
+    const handlerSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmailForm(e.target.value)
+    }
 
     return (
         <FormGroupDiv>
@@ -19,11 +35,11 @@ const EmailInput = () => {
             <InputAuth
                 type="email"
                 id="email"
-                value={email}
                 maxLength={30}
-                onChange={(e) => dispatch(setEmailAction(e.target.value))}
+                value={emailForm}
+                onChange={handlerSetEmail}
             />
-            {emailError && <ErrorForm>{emailError}</ErrorForm>}
+            {emailErrorForm && <ErrorForm>{emailErrorForm}</ErrorForm>}
         </FormGroupDiv>
     );
 };

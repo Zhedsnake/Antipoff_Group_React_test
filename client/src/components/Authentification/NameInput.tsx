@@ -1,16 +1,30 @@
-import React, {useContext, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import InputAuth from "../UI/inputAuth/InputAuth";
 import Label from "../UI/label/label";
 import FormGroupDiv from "../UI/formGroupdiv/formGroupdiv";
 import ErrorForm from "../UI/errorForm/ErrorForm";
-import {useDispatch, useSelector} from "react-redux";
-import {setNameAction} from "../../store/authForm";
+import {useActions} from "../../hooks/useActions";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const NameInput = () => {
-    const dispatch = useDispatch();
-    const name = useSelector(state => state.authFormReducer.name);
-    const nameError = useSelector(state => state.authFormReducer.nameError);
+    const { nameError } = useTypedSelector(state => state.authForm);
+    const {setNameAction} = useActions()
+
+    const [nameForm, setNameForm] = useState<string>('');
+    const [nameErrorForm, setNameErrorForm] = useState<string>('');
+
+    useEffect(() => {
+        setNameAction(nameForm)
+    }, [nameForm])
+
+    useEffect(() => {
+        setNameErrorForm(nameError)
+    }, [nameError])
+
+    const handlerSetName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNameForm(e.target.value)
+    }
 
     return (
         <FormGroupDiv>
@@ -18,11 +32,11 @@ const NameInput = () => {
             <InputAuth
                 type="text"
                 id="name"
-                value={name}
+                value={nameForm}
                 maxLength={30}
-                onChange={(e) => dispatch(setNameAction(e.target.value))}
+                onChange={handlerSetName}
             />
-            {nameError && <ErrorForm>{nameError}</ErrorForm>}
+            {nameErrorForm && <ErrorForm>{nameErrorForm}</ErrorForm>}
         </FormGroupDiv>
     );
 };
