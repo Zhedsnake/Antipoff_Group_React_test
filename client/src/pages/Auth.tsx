@@ -4,7 +4,7 @@ import LogInForm from "../components/Authentification/LogInForm";
 import RegForm from "../components/Authentification/RegForm";
 import Loader from "../components/UI/Loader/Loader";
 import {AuthContext, AuthContextType} from "../context";
-import useToken from "../hooks/useTocken";
+import {setToken} from "../utils/setTocken";
 import {useDispatch, useSelector} from "react-redux";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
@@ -56,7 +56,7 @@ const Auth: React.FC = () => {
     useEffect(() => {
         const logInUser = async () => {
             if (logInToken) {
-                const tokenResponse = await useToken('token', logInToken);
+                const tokenResponse = await setToken('token', logInToken);
                 setIsAuth(tokenResponse);
             }
         };
@@ -66,7 +66,7 @@ const Auth: React.FC = () => {
     useEffect(() => {
         const authenticateUser = async () => {
             if (regToken) {
-                const tokenResponse = await useToken('token', regToken);
+                const tokenResponse = await setToken('token', regToken);
                 setIsAuth(tokenResponse);
             }
         };

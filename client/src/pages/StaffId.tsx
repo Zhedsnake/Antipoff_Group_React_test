@@ -7,7 +7,6 @@ import Loader from "../components/UI/Loader/Loader";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 import {StuffData} from "../types/stuffsData/stuffData";
-import {setDefInputs} from "../store/authFormReducer";
 
 
 const StuffId: React.FC = () => {
