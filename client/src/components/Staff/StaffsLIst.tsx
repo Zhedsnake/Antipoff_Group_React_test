@@ -1,6 +1,5 @@
 import React from 'react';
 import StaffListItem from "./StaffListItem";
-import {IStaff} from "../../types/stuffs";
 import {StuffData} from "../../types/stuffsData/stuffData";
 
 interface StaffsLIstProps {

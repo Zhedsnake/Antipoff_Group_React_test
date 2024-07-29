@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {API_URL} from './config';
-import {IStaffResponse, IStaffsResponse} from "../types/stuffs";
 
 
 export default class StaffsDataService {

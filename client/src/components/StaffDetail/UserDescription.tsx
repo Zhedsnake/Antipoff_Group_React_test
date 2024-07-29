@@ -1,5 +1,4 @@
 import React from 'react';
-import {IStaffProps} from "../../types/stuffs";
 import {StuffData} from "../../types/stuffsData/stuffData";
 
 

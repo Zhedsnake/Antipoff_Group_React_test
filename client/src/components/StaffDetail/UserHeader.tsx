@@ -3,7 +3,6 @@ import React from 'react';
 import BackButton from '../UI/backButton/BackButton';
 import UserDescription from './UserDescription';
 import LogoutButton from '../UI/LogoutButton/LogoutButton';
-import {IStaffProps} from "../../types/stuffs";
 import {StuffData} from "../../types/stuffsData/stuffData";
 
 // Патом поменять принемаемые типы данных на более подробные

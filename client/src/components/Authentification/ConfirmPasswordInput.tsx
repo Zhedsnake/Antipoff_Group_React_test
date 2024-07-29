@@ -10,8 +10,6 @@ import InputAuth from "../UI/inputAuth/InputAuth";
 import PasswordToggleButton from "../UI/passwordToggleButton/PasswordToggleButton";
 import ErrorForm from "../UI/errorForm/ErrorForm";
 import {AuthContext} from "../../context";
-import {useDispatch, useSelector} from "react-redux";
-import {setConfirmPasswordAction} from "../../store/authFormReducer";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useActions} from "../../hooks/useActions";
 

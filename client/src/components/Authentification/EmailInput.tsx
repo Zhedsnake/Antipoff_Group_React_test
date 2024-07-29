@@ -4,9 +4,6 @@ import FormGroupDiv from "../UI/formGroupdiv/formGroupdiv";
 import Label from "../UI/label/label";
 import InputAuth from "../UI/inputAuth/InputAuth";
 import ErrorForm from "../UI/errorForm/ErrorForm";
-import {AuthContext} from "../../context";
-import {useDispatch, useSelector} from "react-redux";
-import {setEmailAction, setNameAction} from "../../store/authFormReducer";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useActions} from "../../hooks/useActions";
 
