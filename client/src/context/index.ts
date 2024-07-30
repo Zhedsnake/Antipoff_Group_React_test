@@ -11,4 +11,4 @@ export interface AuthContextType {
 }
 
 
-export const AuthContext = createContext<AuthContextType>(isAuth = false);
+export const AuthContext = createContext<AuthContextType>();
